@@ -132,6 +132,161 @@ about:Button("血量设置",function()
 game.Players.LocalPlayer.Character.Humanoid.Health = Value
 end)
 
+about:Button("反挂机v2",function()
+  loadstring(game:HttpGet("https://pastebin.com/raw/9fFu43FF"))()
+end)
+
+about:Button("无限跳",function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/V5PQy3y0", true))()
+end)
+
+about:Button("转圈",function()
+loadstring(game:HttpGet('https://pastebin.com/raw/r97d7dS0', true))()
+end)
+
+about:Button("操人脚本",function()
+loadstring(game:HttpGet("https://pastebin.com/raw/bzmhRgKL"))();
+end)
+
+about:Button("操b脚本", function()
+  local SimpleSexGUI = Instance.new("ScreenGui") local FGUI = Instance.new("Frame") local btnNaked = Instance.new("TextButton") local btnSex = Instance.new("TextButton") local tbxVictim = Instance.new("TextBox") local lblFUCKEMALL = Instance.new("TextLabel") local ImageLabel = Instance.new("ImageLabel") local lbltitle = Instance.new("TextLabel") local TextLabel = Instance.new("TextLabel") SimpleSexGUI.Name = "SimpleSexGUI" SimpleSexGUI.Parent = game.CoreGui FGUI.Name = "FGUI" FGUI.Parent = SimpleSexGUI FGUI.BackgroundColor3 = Color3.new(255,255,255) FGUI.BorderSizePixel = 1 FGUI.Position = UDim2.new(0,0, 0.667, 0) FGUI.Size = UDim2.new(0,317, 0,271) FGUI.Draggable = true lbltitle.Name = "Title" lbltitle.Parent = FGUI lbltitle.BackgroundColor3 = Color3.new(255,255,255) lbltitle.BorderSizePixel = 1 lbltitle.Position = UDim2.new (0, 0,-0.122, 0) lbltitle.Size = UDim2.new (0, 317,0, 33) lbltitle.Visible = true lbltitle.Active = true lbltitle.Draggable = false lbltitle.Selectable = true lbltitle.Font = Enum.Font.SourceSansBold lbltitle.Text = "一个简单的操蛋脚本!!" lbltitle.TextColor3 = Color3.new(0, 0, 0) lbltitle.TextSize = 20 btnSex.Name = "Sex" btnSex.Parent = FGUI btnSex.BackgroundColor3 = Color3.new(255,255,255) btnSex.BorderSizePixel = 1 btnSex.Position = UDim2.new (0.044, 0,0.229, 0) btnSex.Size = UDim2.new (0, 99,0, 31) btnSex.Visible = true btnSex.Active = true btnSex.Draggable = false btnSex.Selectable = true btnSex.Font = Enum.Font.SourceSansBold btnSex.Text = "让我们操蛋吧!!" btnSex.TextColor3 = Color3.new(0, 0, 0) btnSex.TextSize = 20 tbxVictim.Name = "VictimTEXT" tbxVictim.Parent = FGUI tbxVictim.BackgroundColor3 = Color3.new(255,255,255) tbxVictim.BorderSizePixel = 1 tbxVictim.Position = UDim2.new (0.533, 0,0.229, 0) tbxVictim.Size = UDim2.new (0, 133,0, 27) tbxVictim.Visible = true tbxVictim.Active = true tbxVictim.Draggable = false tbxVictim.Selectable = true tbxVictim.Font = Enum.Font.SourceSansBold tbxVictim.Text = "名字" tbxVictim.TextColor3 = Color3.new(0, 0, 0) tbxVictim.TextSize = 20 lblFUCKEMALL.Name = "FUCKEMALL" lblFUCKEMALL.Parent = FGUI lblFUCKEMALL.BackgroundColor3 = Color3.new(255,255,255) lblFUCKEMALL.BorderSizePixel = 1 lblFUCKEMALL.Position = UDim2.new (0.025, 0,0.856, 0) lblFUCKEMALL.Size = UDim2.new (0, 301,0, 27) lblFUCKEMALL.Visible = true lblFUCKEMALL.Font = Enum.Font.SourceSansBold lblFUCKEMALL.Text = "操蛋和操蛋" lblFUCKEMALL.TextColor3 = Color3.new(0, 0, 0) lblFUCKEMALL.TextSize = 20 ImageLabel.Name = "ImageLabel" ImageLabel.Parent = FGUI ImageLabel.Image = "http://www.roblox.com/asset/?id=42837..." ImageLabel.BorderSizePixel = 1 ImageLabel.Position = UDim2.new (0.274, 0,0.358, 0) ImageLabel.Size = UDim2.new (0, 106,0, 121) btnSex.MouseButton1Click:Connect(function() local player = tbxVictim.Text local stupid = Instance.new('Animation') stupid.AnimationId = 'rbxassetid://148840371' hummy = game:GetService("Players").LocalPlayer.Character.Humanoid pcall(function() hummy.Parent.Pants:Destroy() end) pcall(function() hummy.Parent.Shirt:Destroy() end) local notfunny = hummy:LoadAnimation(stupid) notfunny:Play() notfunny:AdjustSpeed(10) while hummy.Parent.Parent ~= nil do wait() game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[tbxVictim.Text].Character.HumanoidRootPart.CFrame end end)
+end)
+
+about:Button("Dex抓包",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/XiaoFenHG/Dex-Explorer/refs/heads/main/Dex-Explorer.lua"))()
+end)
+
+about:Button("spy",function()
+getgenv().Spy="汉化Spy" loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaopi77/xiaopi77/refs/heads/main/spy%E6%B1%89%E5%8C%96%20(1).txt"))()
+end)
+
+about:Button("位置仪",function()
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local title = Instance.new("TextLabel")
+local copy = Instance.new("TextButton")
+local pos = Instance.new("TextBox")
+local find = Instance.new("TextButton")
+ 
+--Properties:
+ 
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ 
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.639646292, 0, 0.399008662, 0)
+Frame.Size = UDim2.new(0, 387, 0, 206)
+Frame.Active = true
+ 
+title.Name = "title"
+title.Parent = Frame
+title.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+title.BorderSizePixel = 0
+title.Size = UDim2.new(0, 387, 0, 50)
+title.Font = Enum.Font.GothamBold
+title.Text = "位置仪"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextSize = 30.000
+title.TextWrapped = true
+ 
+copy.Name = "copy"
+copy.Parent = Frame
+copy.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+copy.BorderSizePixel = 0
+copy.Position = UDim2.new(0.527131796, 0, 0.635922313, 0)
+copy.Size = UDim2.new(0, 148, 0, 50)
+copy.Font = Enum.Font.GothamSemibold
+copy.Text = "复制"
+copy.TextColor3 = Color3.fromRGB(255, 255, 255)
+copy.TextSize = 20.000
+ 
+pos.Name = "pos"
+pos.Parent = Frame
+pos.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+pos.BorderSizePixel = 0
+pos.Position = UDim2.new(0.0904392749, 0, 0.305825233, 0)
+pos.Size = UDim2.new(0, 317, 0, 50)
+pos.Font = Enum.Font.GothamSemibold
+pos.Text = ""
+pos.TextColor3 = Color3.fromRGB(255, 255, 255)
+pos.TextSize = 14.000
+pos.TextWrapped = true
+ 
+find.Name = "find"
+find.Parent = Frame
+find.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+find.BorderSizePixel = 0
+find.Position = UDim2.new(0.0904392898, 0, 0.635922313, 0)
+find.Size = UDim2.new(0, 148, 0, 50)
+find.Font = Enum.Font.GothamSemibold
+find.Text = "查找当前位置"
+find.TextColor3 = Color3.fromRGB(255, 255, 255)
+find.TextSize = 20.000
+ 
+-- Scripts:
+ 
+local function UMTQ_fake_script() -- copy.LocalScript 
+	local script = Instance.new('LocalScript', copy)
+ 
+	script.Parent.MouseButton1Click:Connect(function()
+		setclipboard(script.Parent.Parent.pos.Text)
+	end)
+end
+coroutine.wrap(UMTQ_fake_script)()
+local function KJAYG_fake_script() -- Frame.Dragify 
+	local script = Instance.new('LocalScript', Frame)
+ 
+	local UIS = game:GetService("UserInputService")
+	function dragify(Frame)
+	    dragToggle = nil
+	    local dragSpeed = 0
+	    dragInput = nil
+	    dragStart = nil
+	    local dragPos = nil
+	    function updateInput(input)
+	        local Delta = input.Position - dragStart
+	        local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+	        game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.25), {Position = Position}):Play()
+	    end
+	    Frame.InputBegan:Connect(function(input)
+	        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
+	            dragToggle = true
+	            dragStart = input.Position
+	            startPos = Frame.Position
+	            input.Changed:Connect(function()
+	                if input.UserInputState == Enum.UserInputState.End then
+	                    dragToggle = false
+	                end
+	            end)
+	        end
+	    end)
+	    Frame.InputChanged:Connect(function(input)
+	        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+	            dragInput = input
+	        end
+	    end)
+	    game:GetService("UserInputService").InputChanged:Connect(function(input)
+	        if input == dragInput and dragToggle then
+	            updateInput(input)
+	        end
+	    end)
+	end
+ 
+	dragify(script.Parent)
+end
+coroutine.wrap(KJAYG_fake_script)()
+local function EKBNYI_fake_script() -- find.LocalScript 
+	local script = Instance.new('LocalScript', find)
+ 
+	script.Parent.MouseButton1Down:Connect(function()
+		script.Parent.Parent.pos.Text = tostring(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
+	end)
+end
+coroutine.wrap(EKBNYI_fake_script)()
+end)
+
 about:Toggle("自动互动", "Auto Interact", false, function(state)
         if state then
             autoInteract = true
@@ -208,53 +363,8 @@ about:Button("俄州子追",function()
 loadstring(game:HttpGet("https://gist.githubusercontent.com/ClasiniZukov/e7547e7b48fa90d10eb7f85bd3569147/raw/f95cd3561a3bb3ac6172a14eb74233625b52e757/gistfile1.txt"))()
 end)
 
-about:Button("情云同款自瞄可调", function()
-local fov = 100 local smoothness = 10 local crosshairDistance = 5 local RunService = game:GetService("RunService") local UserInputService = game:GetService("UserInputService") local Players = game:GetService("Players") local Cam = game.Workspace.CurrentCamera local FOVring = Drawing.new("Circle") FOVring.Visible = true FOVring.Thickness = 2 FOVring.Color = Color3.fromRGB(0, 255, 0) FOVring.Filled = false FOVring.Radius = fov FOVring.Position = Cam.ViewportSize / 2 local Player = Players.LocalPlayer local PlayerGui = Player:WaitForChild("PlayerGui") local ScreenGui = Instance.new("ScreenGui") ScreenGui.Name = "FovAdjustGui" ScreenGui.Parent = PlayerGui local Frame = Instance.new("Frame") Frame.Name = "MainFrame" Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30) Frame.BorderColor3 = Color3.fromRGB(128, 0, 128) Frame.BorderSizePixel = 2 Frame.Position = UDim2.new(0.3, 0, 0.3, 0) Frame.Size = UDim2.new(0.4, 0, 0.4, 0) Frame.Active = true Frame.Draggable = true Frame.Parent = ScreenGui local MinimizeButton = Instance.new("TextButton") MinimizeButton.Name = "MinimizeButton" MinimizeButton.Text = "-" MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255) MinimizeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50) MinimizeButton.Position = UDim2.new(0.9, 0, 0, 0) MinimizeButton.Size = UDim2.new(0.1, 0, 0.1, 0) MinimizeButton.Parent = Frame local isMinimized = false MinimizeButton.MouseButton1Click:Connect(function() isMinimized = not isMinimized if isMinimized then Frame:TweenSize(UDim2.new(0.1, 0, 0.1, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.3, true) MinimizeButton.Text = "+" else Frame:TweenSize(UDim2.new(0.4, 0, 0.4, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.3, true) MinimizeButton.Text = "-" end end) local FovLabel = Instance.new("TextLabel") FovLabel.Name = "FovLabel" FovLabel.Text = "自瞄范围" FovLabel.TextColor3 = Color3.fromRGB(255, 255, 255) FovLabel.BackgroundTransparency = 1 FovLabel.Position = UDim2.new(0.1, 0, 0.1, 0) FovLabel.Size = UDim2.new(0.8, 0, 0.2, 0) FovLabel.Parent = Frame local FovSlider = Instance.new("TextBox") FovSlider.Name = "FovSlider" FovSlider.Text = tostring(fov) FovSlider.TextColor3 = Color3.fromRGB(255, 255, 255) FovSlider.BackgroundColor3 = Color3.fromRGB(50, 50, 50) FovSlider.Position = UDim2.new(0.1, 0, 0.3, 0) FovSlider.Size = UDim2.new(0.8, 0, 0.2, 0) FovSlider.Parent = Frame local SmoothnessLabel = Instance.new("TextLabel") SmoothnessLabel.Name = "SmoothnessLabel" SmoothnessLabel.Text = "自瞄平滑度" SmoothnessLabel.TextColor3 = Color3.fromRGB(255, 255, 255) SmoothnessLabel.BackgroundTransparency = 1 SmoothnessLabel.Position = UDim2.new(0.1, 0, 0.5, 0) SmoothnessLabel.Size = UDim2.new(0.8, 0, 0.2, 0) SmoothnessLabel.Parent = Frame local SmoothnessSlider = Instance.new("TextBox") SmoothnessSlider.Name = "SmoothnessSlider" SmoothnessSlider.Text = tostring(smoothness) SmoothnessSlider.TextColor3 = Color3.fromRGB(255, 255, 255) SmoothnessSlider.BackgroundColor3 = Color3.fromRGB(50, 50, 50) SmoothnessSlider.Position = UDim2.new(0.1, 0, 0.7, 0) SmoothnessSlider.Size = UDim2.new(0.8, 0, 0.2, 0) SmoothnessSlider.Parent = Frame local CrosshairDistanceLabel = Instance.new("TextLabel") CrosshairDistanceLabel.Name = "CrosshairDistanceLabel" CrosshairDistanceLabel.Text = "自瞄预判距离" CrosshairDistanceLabel.TextColor3 = Color3.fromRGB(255, 255, 255) CrosshairDistanceLabel.BackgroundTransparency = 1 CrosshairDistanceLabel.Position = UDim2.new(0.1, 0, 0.9, 0) CrosshairDistanceLabel.Size = UDim2.new(0.8, 0, 0.2, 0) CrosshairDistanceLabel.Parent = Frame local CrosshairDistanceSlider = Instance.new("TextBox") CrosshairDistanceSlider.Name = "CrosshairDistanceSlider" CrosshairDistanceSlider.Text = tostring(crosshairDistance) CrosshairDistanceSlider.TextColor3 = Color3.fromRGB(255, 255, 255) CrosshairDistanceSlider.BackgroundColor3 = Color3.fromRGB(50, 50, 50) CrosshairDistanceSlider.Position = UDim2.new(0.1, 0, 1.1, 0) CrosshairDistanceSlider.Size = UDim2.new(0.8, 0, 0.2, 0) CrosshairDistanceSlider.Parent = Frame local targetCFrame = Cam.CFrame local function updateDrawings() local camViewportSize = Cam.ViewportSize FOVring.Position = camViewportSize / 2 FOVring.Radius = fov end local function onKeyDown(input) if input.KeyCode == Enum.KeyCode.Delete then RunService:UnbindFromRenderStep("FOVUpdate") FOVring:Remove() end end UserInputService.InputBegan:Connect(onKeyDown) local function getClosestPlayerInFOV(trg_part) local nearest = nil local last = math.huge local playerMousePos = Cam.ViewportSize / 2 for _, player in ipairs(Players:GetPlayers()) do if player ~= Players.LocalPlayer then local part = player.Character and player.Character:FindFirstChild(trg_part) if part then local ePos, isVisible = Cam:WorldToViewportPoint(part.Position) local distance = (Vector2.new(ePos.x, ePos.y) - playerMousePos).Magnitude if distance < last and isVisible and distance < fov then last = distance nearest = player end end end end return nearest end RunService.RenderStepped:Connect(function() updateDrawings() local closest = getClosestPlayerInFOV("Head") if closest and closest.Character:FindFirstChild("Head") then local targetCharacter = closest.Character local targetHead = targetCharacter.Head local targetRootPart = targetCharacter:FindFirstChild("HumanoidRootPart") local isMoving = targetRootPart.Velocity.Magnitude > 0.1 local targetPosition if isMoving then targetPosition = targetHead.Position + (targetHead.CFrame.LookVector * crosshairDistance) else targetPosition = targetHead.Position end targetCFrame = CFrame.new(Cam.CFrame.Position, targetPosition) else targetCFrame = Cam.CFrame end Cam.CFrame = Cam.CFrame:Lerp(targetCFrame, 1 / smoothness) end) FovSlider.FocusLost:Connect(function(enterPressed, inputThatCausedFocusLoss) if enterPressed then local newFov = tonumber(FovSlider.Text) if newFov then fov = newFov else FovSlider.Text = tostring(fov) end end end) SmoothnessSlider.FocusLost:Connect(function(enterPressed, inputThatCausedFocusLoss) if enterPressed then local newSmoothness = tonumber(SmoothnessSlider.Text) if newSmoothness then smoothness = newSmoothness else SmoothnessSlider.Text = tostring(smoothness) end end end) CrosshairDistanceSlider.FocusLost:Connect(function(enterPressed, inputThatCausedFocusLoss) if enterPressed then local newCrosshairDistance = tonumber(CrosshairDistanceSlider.Text) if newCrosshairDistance then crosshairDistance = newCrosshairDistance else CrosshairDistanceSlider.Text = tostring(crosshairDistance) end end end)
-end)
-
 about:Button("汉化阿尔宙斯自瞄",function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/sgbs/main/%E4%B8%81%E4%B8%81%20%E6%B1%89%E5%8C%96%E8%87%AA%E7%9E%84.txt"))()
-end)
-
-about:Button("修复范围",function()
-    _G.HeadSize = 15
-_G.Disabled = true
-
-game:GetService('RunService').RenderStepped:connect(function()
-if _G.Disabled then
-for i,v in next, game:GetService('Players'):GetPlayers() do
-if v.Name ~= game:GetService('Players').LocalPlayer.Name then
-pcall(function()
-v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
-v.Character.HumanoidRootPart.Transparency = 0.7
-v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really blue")
-v.Character.HumanoidRootPart.Material = "Neon"
-v.Character.HumanoidRootPart.CanCollide = false
-end)
-end
-end
-end
-end)
-end)
-
-about:Textbox("自定义范围!", "HitBox", "输入", function(Value)
-   _G.HeadSize = Value
-    _G.Disabled = true 
-   game:GetService('RunService').RenderStepped:connect(function()
-    if _G.Disabled then
-    for i,v in next, game:GetService('Players'):GetPlayers() do
-    if v.Name ~= game:GetService('Players').LocalPlayer.Name then 
-    pcall(function()
-    v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize) 
-   v.Character.HumanoidRootPart.Transparency = 0.7 
-   v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really red")
-    v.Character.HumanoidRootPart.Material = "Neon"
-    v.Character.HumanoidRootPart.CanCollide = false
-    end)
-    end 
-   end 
-   end
-    end)
 end)
 
 about:Button("普通范围",function()
@@ -399,7 +509,7 @@ loadstring(game:HttpGet("https://pastebin.com/raw/pMyEyJN6"))()
 end)
 
 about:Button("旋转1",function()
-loadstring(game:HttpGet("https://pastebin.com/raw/
+loadstring(game:HttpGet("https://pastebin.com/raw/"))()
 end)
 
 about:Button("在聊天框中进行图画",function()
@@ -407,11 +517,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ocfi/Draw-To-Chat-Obf
 end)
 
 about:Button("npc秒杀",function()
-if Value then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/WSbuq/-/main/killNPC"))()
-    else
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/WSbuq/-/main/killNPC1"))()
-  end
+loadstring(game:HttpGet("https://raw.githubusercontent.com/WSbuq/-/main/killNPC"))()
 end)
 
 about:Button("穿墙(可关闭)",function()
@@ -520,6 +626,66 @@ about:Toggle("查看玩家", 'Toggleflag', false, function(state)
         game:GetService('Workspace').CurrentCamera.CameraSubject = lp.Character.Humanoid
     end
 end)
+
+local UITab3 = win:Tab("画质",'16060333448')
+
+local about = UITab3:section("画质",true)
+
+about:Button("光影", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MZEEN2424/Graphics/main/Graphics.xml"))()
+end)
+
+about:Button("光影滤镜", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MZEEN2424/Graphics/main/Graphics.xml"))()
+end)
+
+about:Button("超高画质",function()
+loadstring(game:HttpGet("https://pastebin.com/raw/jHBfJYmS"))()
+end)
+
+about:Button("光影V4",function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MZEEN2424/Graphics/main/Graphics.xml"))()
+end)
+
+about:Button("RTX高仿",function()
+loadstring(game:HttpGet('https://pastebin.com/raw/Bkf0BJb3'))()
+end)
+
+about:Button("光影深", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MZEEN2424/Graphics/main/Graphics.xml"))()
+end)
+about:Button("光影浅", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/jHBfJYmS"))()
+end)
+
+local UITab8 = win:Tab("『无限Robux』",'16060333448')
+
+local about = UITab8:section("可以用！",false)
+
+about:Button("20Robux",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/CloudX-ScriptsWane/White-ash-script/main/Free%20Robux.LUA'))()
+end)
+
+about:Button("50Robux",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/CloudX-ScriptsWane/White-ash-script/main/Free%20Robux.LUA'))()
+end)
+
+about:Button("100Robux",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/CloudX-ScriptsWane/White-ash-script/main/Free%20Robux.LUA'))()
+end)
+
+about:Button("200Robux",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/CloudX-ScriptsWane/White-ash-script/main/Free%20Robux.LUA'))()
+end)
+
+about:Button("500Robux",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/CloudX-ScriptsWane/White-ash-script/main/Free%20Robux.LUA'))()
+end)
+
+about:Button("1000Robux",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/CloudX-ScriptsWane/White-ash-script/main/Free%20Robux.LUA'))()
+end)
+
 
 local UITab4 = win:Tab("『FE』",'7734068321')
 
@@ -655,7 +821,191 @@ about:Button("义勇军进行曲", function()
     sound.Parent = game.Workspace
     sound:Play()
     end)
+
+about:Button("彩虹瀑布",function()
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://1837879082"
+    sound.Parent = game.Workspace
+    sound:Play()
+    end)
     
+about:Button("火车音", function()
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://3900067524"
+    sound.Parent = game.Workspace
+    sound:Play()
+    end)
+    
+about:Button("Gentry Road",function()
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://5567523008"
+    sound.Parent = game.Workspace
+    sound:Play()
+    end)
+    
+about:Button("植物大战僵尸",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://158260415" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+   about:Button("早安越南",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://8295016126" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+      about:Button("愤怒芒西 Evade?",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://5029269312" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+      about:Button("梅西",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://7354576319" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+      about:Button("永春拳",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://1845973140" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+   about:Button("带劲的音乐",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://18841891575" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+      about:Button("韩国国歌",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://1837478300" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+      about:Button("哥哥你女朋友不会吃醋吧?",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://8715811379" 
+     sound.Parent = game.Workspace 
+     sound:Play()  
+     end) 
+     
+      about:Button("蜘蛛侠出场声音",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://9108472930" 
+     sound.Parent = game.Workspace 
+     sound:Play()
+     end) 
+     
+      about:Button("消防车",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://317455930" 
+     sound.Parent = game.Workspace 
+     sound:Play()
+     end) 
+     
+      about:Button("万圣节1🎃",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://1837467198" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+   about:Button("好听的",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://1844125168" 
+     sound.Parent = game.Workspace 
+     sound:Play()
+     end) 
+     
+ about:Button("国外音乐脚本",function()          
+ loadstring(game:HttpGet(('https://pastebin.com/raw/g97RafnE'),true))()                   
+end) 
+
+   about:Button("国歌[Krx版]",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://1845918434" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+   about:Button("妈妈生的",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://6689498326" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+   about:Button("Music Ball-CTT",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://9045415830" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+   about:Button("电音",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://6911766512" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+   about:Button("梗合集",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://8161248815" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+   about:Button("Its been so long",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://6913550990" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+   about:Button("Baller",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://13530439660" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end)
+   about:Button("男娘必听",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://6797864253" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+   about:Button("螃蟹之舞",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://54100886218" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+   about:Button("布鲁克林惨案",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://6783714255" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
+   about:Button("航空模拟器音乐",function() 
+         local sound = Instance.new("Sound") 
+     sound.SoundId = "rbxassetid://1838080629" 
+     sound.Parent = game.Workspace 
+     sound:Play() 
+     end) 
+     
 local UITab5 = win:Tab("『忍者传奇』",'7734068321')
 
 local about = UITab5:section("『忍者传奇』",true)
