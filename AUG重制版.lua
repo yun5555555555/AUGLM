@@ -139,6 +139,10 @@ about:Slider('设置重力', 'Sliderflag', 196.2, 196.2, 1000,false, function(Va
         game.Workspace.Gravity = Value
     end)
 
+about:Button("血量设置",function()
+game.Players.LocalPlayer.Character.Humanoid.Health = Value
+end)
+
 about:Button("玩家加入游戏提示",function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/boyscp/scriscriptsc/main/bbn.lua"))()
 end)
@@ -290,6 +294,178 @@ end)
 
 about:Toggle("ESP 显示名字", "AMG", ENABLED, function(enabled)
     if enabled then ENABLED = true for _, player in ipairs(Players:GetPlayers()) do onPlayerAdded(player) end Players.PlayerAdded:Connect(onPlayerAdded) Players.PlayerRemoving:Connect(onPlayerRemoving) local localPlayer = Players.LocalPlayer if localPlayer and localPlayer.Character then for _, player in ipairs(Players:GetPlayers()) do if player.Character then createNameLabel(player) end end end RunService.Heartbeat:Connect(function() if ENABLED then for _, player in ipairs(Players:GetPlayers()) do if player.Character then createNameLabel(player) end end end end) else ENABLED = false for _, player in ipairs(Players:GetPlayers()) do onPlayerRemoving(player) end RunService:UnbindFromRenderStep("move") end
+end)
+
+about:Button("视野设置",function()
+Workspace.CurrentCamera.FieldOfView = Value
+end)
+
+about:Button("帧率",function()
+Gui to Lua 
+ -- Version: 3.2 
+  
+ -- Instances:
+ local ScreenGui = Instance.new("ScreenGui") 
+ local FpsLabel = Instance.new("TextLabel")
+ 
+ --Properties:
+ 
+ ScreenGui.Name = "FPSGui" 
+ ScreenGui.ResetOnSpawn = false 
+ ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling 
+ 
+ FpsLabel.Name = "FPSLabel" 
+ FpsLabel.Size = UDim2.new(0, 100, 0, 50) 
+ FpsLabel.Position = UDim2.new(0, 10, 0, 10) 
+ FpsLabel.BackgroundTransparency = 1 
+ FpsLabel.Font = Enum.Font.SourceSansBold 
+ FpsLabel.Text = "帧率: 0" 
+ FpsLabel.TextSize = 20 
+ FpsLabel.TextColor3 = Color3.new(1, 1, 1) 
+ FpsLabel.Parent = ScreenGui 
+  
+ function updateFpsLabel() 
+     local fps = math.floor(1 / game:GetService("RunService").RenderStepped:Wait()) 
+     FpsLabel.Text = "帧率: " .. fps 
+ end 
+  
+  game:GetService("RunService").RenderStepped:Connect(updateFpsLabel) 
+  
+ ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+
+ animateCredits()
+end)
+
+about:Button("飞行",function()
+loadstring(game:HttpGet("https://pastebin.com/raw/pMyEyJN6"))()
+end)
+
+about:Button("旋转1",function()
+loadstring(game:HttpGet("https://pastebin.com/raw/
+end)
+
+about:Button("旋转2",function()
+BROUGHT TO YOU BY RSCRIPTS.NET--
+
+if game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R6 then
+spawn(function()
+local speaker = game.Players.LocalPlayer
+local Anim = Instance.new("Animation")
+     Anim.AnimationId = "rbxassetid://27432686"
+     local bruh = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+bruh:Play()
+bruh:AdjustSpeed(0)
+speaker.Character.Animate.Disabled = true
+local hi = Instance.new("Sound")
+hi.Name = "Sound"
+hi.SoundId = "http://www.roblox.com/asset/?id=8114290584"
+hi.Volume = 2
+hi.Looped = false
+hi.archivable = false
+hi.Parent = game.Workspace
+hi:Play()
+wait(1.5)
+local spinSpeed = 30
+local Spin = Instance.new("BodyAngularVelocity")
+Spin.Name = "Spinning"
+Spin.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+Spin.MaxTorque = Vector3.new(0, math.huge, 0)
+Spin.AngularVelocity = Vector3.new(0,spinSpeed,0)
+wait(3.5)
+while speaker.Character.Humanoid.Health > 0 do
+   wait(0)
+speaker.Character.Humanoid.HipHeight = speaker.Character.Humanoid.HipHeight + 0
+end
+end)
+else
+spawn(function()
+local speaker = game.Players.LocalPlayer
+local Anim = Instance.new("Animation")
+     Anim.AnimationId = "rbxassetid://507776043"
+     local bruh = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+bruh:Play()
+bruh:AdjustSpeed(0)
+speaker.Character.Animate.Disabled = true
+local hi = Instance.new("Sound")
+hi.Name = "Sound"
+hi.SoundId = "http://www.roblox.com/asset/?id=8114290584"
+hi.Volume = 0
+hi.Looped = false
+hi.archivable = false
+hi.Parent = game.Workspace
+hi:Play()
+wait()
+local spinSpeed = 30
+local Spin = Instance.new("BodyAngularVelocity")
+Spin.Name = "Spinning"
+Spin.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+Spin.MaxTorque = Vector3.new(0, math.huge, 0)
+Spin.AngularVelocity = Vector3.new(0,spinSpeed,0)
+wait(3.5)
+while speaker.Character.Humanoid.Health > 0 do
+   wait(0)
+speaker.Character.Humanoid.HipHeight = speaker.Character.Humanoid.HipHeight + 0
+end
+end)
+
+about:Button("传送工具",function()
+mouse = game.Players.LocalPlayer:GetMouse() tool = Instance.new("Tool") tool.RequiresHandle = false tool.Name = "[BS]传送工具" tool.Activated:connect(function() local pos = mouse.Hit+Vector3.new(0,2.5,0) pos = CFrame.new(pos.X,pos.Y,pos.Z) game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos end) tool.Parent = game.Players.LocalPlayer.Backpack
+end)
+
+about:Button("在聊天框中进行图画",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ocfi/Draw-To-Chat-Obfuscated/refs/heads/main/Draw%20to%20Chat"))()
+end)
+
+about:Button("npc秒杀",function()
+if Value then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/WSbuq/-/main/killNPC"))()
+    else
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/WSbuq/-/main/killNPC1"))()
+  end
+end)
+
+about:Button("穿墙(可关闭)",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TtmScripter/OtherScript/main/Noclip"))()
+end)
+
+about:Button("在聊天框中进行图画",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ocfi/Draw-To-Chat-Obfuscated/refs/heads/main/Draw%20to%20Chat"))()
+end)
+
+about:Button("穿墙(可关闭)",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TtmScripter/OtherScript/main/Noclip"))()
+end)
+
+about:Button("灵魂出窍",function()
+loadstring(game:HttpGet("https://pastebin.com/raw/ahK5jRxM"))()
+end)
+
+about:Button("点击传送工具",function()
+mouse = game.Players.LocalPlayer:GetMouse() tool = Instance.new("Tool") tool.RequiresHandle = false tool.Name = "[FE] TELEPORT TOOL" tool.Activated:connect(function() local pos = mouse.Hit+Vector3.new(0,2.5,0) pos = CFrame.new(pos.X,pos.Y,pos.Z) game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos end) tool.Parent = game.Players.LocalPlayer.Backpack
+end)
+
+about:Button("透视",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP'))()
+end)
+
+about:Button("苏脚本铁拳打人",function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt'),true))()
+end)
+
+about:Button("走路创人",function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/obf_5wpM7bBcOPspmX7lQ3m75SrYNWqxZ858ai3tJdEAId6jSI05IOUB224FQ0VSAswH.lua.txt'),true))()
+end)
+
+about:Button("吸人",function()
+loadstring(game:HttpGet('https://pastebin.com/raw/PVPFXqtH'))()
+end)
+about:Button("隐身",function()
+loadstring(game:HttpGet('https://pastebin.com/raw/3Rnd9rHf'))()
+end)
+
+about:Button("安全区",function()
+loadstring(game:HttpGet("https://pastebin.com/raw/rmPfWVU3"))()
 end)
 
 local UITab3 = win:Tab("脚本合集",'16060333448')
