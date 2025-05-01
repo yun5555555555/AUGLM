@@ -112,6 +112,10 @@ about:Label("你现在的服务器id:"..game.GameId)
 about:Label("你的用户ID:"..game.Players.LocalPlayer.UserId)
 about:Label("获取客户端ID:"..game:GetService("RbxAnalyticsService"):GetClientId())
 
+local UITab3 = win:Tab("通用",'16060333448')
+
+local about = UITab3:section("通用",true)
+
 about:Toggle("脚本框架变小一点", "", false, function(state)
         if state then
         game:GetService("CoreGui")["frosty"].Main.Style = "DropShadow"
@@ -122,10 +126,6 @@ about:Toggle("脚本框架变小一点", "", false, function(state)
     about:Button("关闭脚本",function()
         game:GetService("CoreGui")["frosty"]:Destroy()
     end)
-
-local UITab3 = win:Tab("通用",'16060333448')
-
-local about = UITab3:section("通用",true)
 
 about:Slider("步行速度!", "WalkSpeed", game.Players.LocalPlayer.Character.Humanoid.WalkSpeed, 16, 400, false, function(Speed)
   spawn(function() while task.wait() do game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Speed end end)
@@ -141,6 +141,122 @@ about:Slider('设置重力', 'Sliderflag', 196.2, 196.2, 1000,false, function(Va
 
 about:Button("血量设置",function()
 game.Players.LocalPlayer.Character.Humanoid.Health = Value
+end)
+
+local Players = about:Dropdown("选择玩家", 'Dropdown', dropdown, function(v)
+    playernamedied = v
+end)
+
+game.Players.ChildAdded:Connect(function(player)
+    dropdown[player.UserId] = player.Name
+    Players:AddOption(player.Name)
+end)
+
+game.Players.ChildRemoved:Connect(function(player)
+    Players:RemoveOption(player.Name)
+    for k, v in pairs(dropdown) do
+        if v == player.Name then
+            dropdown[k] = nil
+        end
+    end
+end)
+
+about:Button("传送到玩家旁边", function()
+    local HumRoot = game.Players.LocalPlayer.Character.HumanoidRootPart
+    local tp_player = game.Players:FindFirstChild(playernamedied)
+    if tp_player and tp_player.Character and tp_player.Character.HumanoidRootPart then
+        HumRoot.CFrame = tp_player.Character.HumanoidRootPart.CFrame + Vector3.new(0, 3, 0)
+        Notify("大司马", "已经传送到玩家身边", "rbxassetid://", 5)
+    else
+        Notify("大司马", "无法传送 玩家已消失", "rbxassetid://", 5)
+    end
+end)
+
+about:Button("把玩家传送过来", function()
+    local HumRoot = game.Players.LocalPlayer.Character.HumanoidRootPart
+    local tp_player = game.Players:FindFirstChild(playernamedied)
+    if tp_player and tp_player.Character and tp_player.Character.HumanoidRootPart then
+        tp_player.Character.HumanoidRootPart.CFrame = HumRoot.CFrame + Vector3.new(0, 3, 0)
+        Notify("大司马", "已传送过来", "rbxassetid://", 5)
+    else
+        Notify("大司马", "无法传送 玩家已消失", "rbxassetid://", 5)
+    end
+end)
+
+about:Toggle("查看玩家", 'Toggleflag', false, function(state)
+    if state then
+        game:GetService('Workspace').CurrentCamera.CameraSubject =
+            game:GetService('Players'):FindFirstChild(playernamedied).Character.Humanoid
+            Notify("大司马", "已开启", "rbxassetid://", 5)
+    else
+        Notify("大司马", "已关闭", "rbxassetid://", 5)
+        local lp = game.Players.LocalPlayer
+        game:GetService('Workspace').CurrentCamera.CameraSubject = lp.Character.Humanoid
+    end
+end)
+
+about:Toggle("自动互动", "Auto Interact", false, function(state)
+        if state then
+            autoInteract = true
+            while autoInteract do
+                for _, descendant in pairs(workspace:GetDescendants()) do
+                    if descendant:IsA("ProximityPrompt") then
+                        fireproximityprompt(descendant)
+                    end
+                end
+                task.wait(0.25) -- Adjust the wait time as needed
+            end
+        else
+            autoInteract = false
+        end
+    end)
+    
+about:Button("情云同款自瞄可调", function()
+  local fov = 100 local smoothness = 10 local crosshairDistance = 5 local RunService = game:GetService("RunService") local UserInputService = game:GetService("UserInputService") local Players = game:GetService("Players") local Cam = game.Workspace.CurrentCamera local FOVring = Drawing.new("Circle") FOVring.Visible = true FOVring.Thickness = 2 FOVring.Color = Color3.fromRGB(0, 255, 0) FOVring.Filled = false FOVring.Radius = fov FOVring.Position = Cam.ViewportSize / 2 local Player = Players.LocalPlayer local PlayerGui = Player:WaitForChild("PlayerGui") local ScreenGui = Instance.new("ScreenGui") ScreenGui.Name = "FovAdjustGui" ScreenGui.Parent = PlayerGui local Frame = Instance.new("Frame") Frame.Name = "MainFrame" Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30) Frame.BorderColor3 = Color3.fromRGB(128, 0, 128) Frame.BorderSizePixel = 2 Frame.Position = UDim2.new(0.3, 0, 0.3, 0) Frame.Size = UDim2.new(0.4, 0, 0.4, 0) Frame.Active = true Frame.Draggable = true Frame.Parent = ScreenGui local MinimizeButton = Instance.new("TextButton") MinimizeButton.Name = "MinimizeButton" MinimizeButton.Text = "-" MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255) MinimizeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50) MinimizeButton.Position = UDim2.new(0.9, 0, 0, 0) MinimizeButton.Size = UDim2.new(0.1, 0, 0.1, 0) MinimizeButton.Parent = Frame local isMinimized = false MinimizeButton.MouseButton1Click:Connect(function() isMinimized = not isMinimized if isMinimized then Frame:TweenSize(UDim2.new(0.1, 0, 0.1, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.3, true) MinimizeButton.Text = "+" else Frame:TweenSize(UDim2.new(0.4, 0, 0.4, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.3, true) MinimizeButton.Text = "-" end end) local FovLabel = Instance.new("TextLabel") FovLabel.Name = "FovLabel" FovLabel.Text = "自瞄范围" FovLabel.TextColor3 = Color3.fromRGB(255, 255, 255) FovLabel.BackgroundTransparency = 1 FovLabel.Position = UDim2.new(0.1, 0, 0.1, 0) FovLabel.Size = UDim2.new(0.8, 0, 0.2, 0) FovLabel.Parent = Frame local FovSlider = Instance.new("TextBox") FovSlider.Name = "FovSlider" FovSlider.Text = tostring(fov) FovSlider.TextColor3 = Color3.fromRGB(255, 255, 255) FovSlider.BackgroundColor3 = Color3.fromRGB(50, 50, 50) FovSlider.Position = UDim2.new(0.1, 0, 0.3, 0) FovSlider.Size = UDim2.new(0.8, 0, 0.2, 0) FovSlider.Parent = Frame local SmoothnessLabel = Instance.new("TextLabel") SmoothnessLabel.Name = "SmoothnessLabel" SmoothnessLabel.Text = "自瞄平滑度" SmoothnessLabel.TextColor3 = Color3.fromRGB(255, 255, 255) SmoothnessLabel.BackgroundTransparency = 1 SmoothnessLabel.Position = UDim2.new(0.1, 0, 0.5, 0) SmoothnessLabel.Size = UDim2.new(0.8, 0, 0.2, 0) SmoothnessLabel.Parent = Frame local SmoothnessSlider = Instance.new("TextBox") SmoothnessSlider.Name = "SmoothnessSlider" SmoothnessSlider.Text = tostring(smoothness) SmoothnessSlider.TextColor3 = Color3.fromRGB(255, 255, 255) SmoothnessSlider.BackgroundColor3 = Color3.fromRGB(50, 50, 50) SmoothnessSlider.Position = UDim2.new(0.1, 0, 0.7, 0) SmoothnessSlider.Size = UDim2.new(0.8, 0, 0.2, 0) SmoothnessSlider.Parent = Frame local CrosshairDistanceLabel = Instance.new("TextLabel") CrosshairDistanceLabel.Name = "CrosshairDistanceLabel" CrosshairDistanceLabel.Text = "自瞄预判距离" CrosshairDistanceLabel.TextColor3 = Color3.fromRGB(255, 255, 255) CrosshairDistanceLabel.BackgroundTransparency = 1 CrosshairDistanceLabel.Position = UDim2.new(0.1, 0, 0.9, 0) CrosshairDistanceLabel.Size = UDim2.new(0.8, 0, 0.2, 0) CrosshairDistanceLabel.Parent = Frame local CrosshairDistanceSlider = Instance.new("TextBox") CrosshairDistanceSlider.Name = "CrosshairDistanceSlider" CrosshairDistanceSlider.Text = tostring(crosshairDistance) CrosshairDistanceSlider.TextColor3 = Color3.fromRGB(255, 255, 255) CrosshairDistanceSlider.BackgroundColor3 = Color3.fromRGB(50, 50, 50) CrosshairDistanceSlider.Position = UDim2.new(0.1, 0, 1.1, 0) CrosshairDistanceSlider.Size = UDim2.new(0.8, 0, 0.2, 0) CrosshairDistanceSlider.Parent = Frame local targetCFrame = Cam.CFrame local function updateDrawings() local camViewportSize = Cam.ViewportSize FOVring.Position = camViewportSize / 2 FOVring.Radius = fov end local function onKeyDown(input) if input.KeyCode == Enum.KeyCode.Delete then RunService:UnbindFromRenderStep("FOVUpdate") FOVring:Remove() end end UserInputService.InputBegan:Connect(onKeyDown) local function getClosestPlayerInFOV(trg_part) local nearest = nil local last = math.huge local playerMousePos = Cam.ViewportSize / 2 for _, player in ipairs(Players:GetPlayers()) do if player ~= Players.LocalPlayer then local part = player.Character and player.Character:FindFirstChild(trg_part) if part then local ePos, isVisible = Cam:WorldToViewportPoint(part.Position) local distance = (Vector2.new(ePos.x, ePos.y) - playerMousePos).Magnitude if distance < last and isVisible and distance < fov then last = distance nearest = player end end end end return nearest end RunService.RenderStepped:Connect(function() updateDrawings() local closest = getClosestPlayerInFOV("Head") if closest and closest.Character:FindFirstChild("Head") then local targetCharacter = closest.Character local targetHead = targetCharacter.Head local targetRootPart = targetCharacter:FindFirstChild("HumanoidRootPart") local isMoving = targetRootPart.Velocity.Magnitude > 0.1 local targetPosition if isMoving then targetPosition = targetHead.Position + (targetHead.CFrame.LookVector * crosshairDistance) else targetPosition = targetHead.Position end targetCFrame = CFrame.new(Cam.CFrame.Position, targetPosition) else targetCFrame = Cam.CFrame end Cam.CFrame = Cam.CFrame:Lerp(targetCFrame, 1 / smoothness) end) FovSlider.FocusLost:Connect(function(enterPressed, inputThatCausedFocusLoss) if enterPressed then local newFov = tonumber(FovSlider.Text) if newFov then fov = newFov else FovSlider.Text = tostring(fov) end end end) SmoothnessSlider.FocusLost:Connect(function(enterPressed, inputThatCausedFocusLoss) if enterPressed then local newSmoothness = tonumber(SmoothnessSlider.Text) if newSmoothness then smoothness = newSmoothness else SmoothnessSlider.Text = tostring(smoothness) end end end) CrosshairDistanceSlider.FocusLost:Connect(function(enterPressed, inputThatCausedFocusLoss) if enterPressed then local newCrosshairDistance = tonumber(CrosshairDistanceSlider.Text) if newCrosshairDistance then crosshairDistance = newCrosshairDistance else CrosshairDistanceSlider.Text = tostring(crosshairDistance) end end end)
+end)
+
+about:Button("汉化阿尔宙斯自瞄",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/sgbs/main/%E4%B8%81%E4%B8%81%20%E6%B1%89%E5%8C%96%E8%87%AA%E7%9E%84.txt"))()
+end)
+
+about:Button("透视1",function()
+loadstring(game:HttpGet('https://pastebin.com/raw/MA8jhPWT'))()
+end)
+
+about:Button("透视2",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP'))()
+end)
+
+about:Button("无敌『不适用』",function()
+loadstring(game:HttpGet('https://pastebin.com/raw/H3RLCWWZ'))()
+end)
+
+about:Button("隐身（E）",function()
+loadstring(game:HttpGet('https://pastebin.com/raw/nwGEvkez'))()
+end)
+
+about:Button("电脑键盘",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+end)
+
+about:Button("飞车",function()
+loadstring(game:HttpGet("https://pastebin.com/raw/G3GnBCyC", true))()
+end)
+
+about:Button("踏空行走",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Float'))()
+end)
+
+about:Button("飞车2",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/vb/main/%E9%A3%9E%E8%BD%A6.lua"))()
+end)
+
+about:Button("旋转",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/tt/main/%E6%97%8B%E8%BD%AC.lua"))()
+end)
+
+about:Button("紫莎",function()
+game.Players.LocalPlayer.Character.Humanoid.Health=0
 end)
 
 about:Button("玩家加入游戏提示",function()
@@ -296,117 +412,12 @@ about:Toggle("ESP 显示名字", "AMG", ENABLED, function(enabled)
     if enabled then ENABLED = true for _, player in ipairs(Players:GetPlayers()) do onPlayerAdded(player) end Players.PlayerAdded:Connect(onPlayerAdded) Players.PlayerRemoving:Connect(onPlayerRemoving) local localPlayer = Players.LocalPlayer if localPlayer and localPlayer.Character then for _, player in ipairs(Players:GetPlayers()) do if player.Character then createNameLabel(player) end end end RunService.Heartbeat:Connect(function() if ENABLED then for _, player in ipairs(Players:GetPlayers()) do if player.Character then createNameLabel(player) end end end end) else ENABLED = false for _, player in ipairs(Players:GetPlayers()) do onPlayerRemoving(player) end RunService:UnbindFromRenderStep("move") end
 end)
 
-about:Button("视野设置",function()
-Workspace.CurrentCamera.FieldOfView = Value
-end)
-
-about:Button("帧率",function()
-Gui to Lua 
- -- Version: 3.2 
-  
- -- Instances:
- local ScreenGui = Instance.new("ScreenGui") 
- local FpsLabel = Instance.new("TextLabel")
- 
- --Properties:
- 
- ScreenGui.Name = "FPSGui" 
- ScreenGui.ResetOnSpawn = false 
- ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling 
- 
- FpsLabel.Name = "FPSLabel" 
- FpsLabel.Size = UDim2.new(0, 100, 0, 50) 
- FpsLabel.Position = UDim2.new(0, 10, 0, 10) 
- FpsLabel.BackgroundTransparency = 1 
- FpsLabel.Font = Enum.Font.SourceSansBold 
- FpsLabel.Text = "帧率: 0" 
- FpsLabel.TextSize = 20 
- FpsLabel.TextColor3 = Color3.new(1, 1, 1) 
- FpsLabel.Parent = ScreenGui 
-  
- function updateFpsLabel() 
-     local fps = math.floor(1 / game:GetService("RunService").RenderStepped:Wait()) 
-     FpsLabel.Text = "帧率: " .. fps 
- end 
-  
-  game:GetService("RunService").RenderStepped:Connect(updateFpsLabel) 
-  
- ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-
- animateCredits()
-end)
-
 about:Button("飞行",function()
 loadstring(game:HttpGet("https://pastebin.com/raw/pMyEyJN6"))()
 end)
 
 about:Button("旋转1",function()
 loadstring(game:HttpGet("https://pastebin.com/raw/
-end)
-
-about:Button("旋转2",function()
-BROUGHT TO YOU BY RSCRIPTS.NET--
-
-if game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R6 then
-spawn(function()
-local speaker = game.Players.LocalPlayer
-local Anim = Instance.new("Animation")
-     Anim.AnimationId = "rbxassetid://27432686"
-     local bruh = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
-bruh:Play()
-bruh:AdjustSpeed(0)
-speaker.Character.Animate.Disabled = true
-local hi = Instance.new("Sound")
-hi.Name = "Sound"
-hi.SoundId = "http://www.roblox.com/asset/?id=8114290584"
-hi.Volume = 2
-hi.Looped = false
-hi.archivable = false
-hi.Parent = game.Workspace
-hi:Play()
-wait(1.5)
-local spinSpeed = 30
-local Spin = Instance.new("BodyAngularVelocity")
-Spin.Name = "Spinning"
-Spin.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
-Spin.MaxTorque = Vector3.new(0, math.huge, 0)
-Spin.AngularVelocity = Vector3.new(0,spinSpeed,0)
-wait(3.5)
-while speaker.Character.Humanoid.Health > 0 do
-   wait(0)
-speaker.Character.Humanoid.HipHeight = speaker.Character.Humanoid.HipHeight + 0
-end
-end)
-else
-spawn(function()
-local speaker = game.Players.LocalPlayer
-local Anim = Instance.new("Animation")
-     Anim.AnimationId = "rbxassetid://507776043"
-     local bruh = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
-bruh:Play()
-bruh:AdjustSpeed(0)
-speaker.Character.Animate.Disabled = true
-local hi = Instance.new("Sound")
-hi.Name = "Sound"
-hi.SoundId = "http://www.roblox.com/asset/?id=8114290584"
-hi.Volume = 0
-hi.Looped = false
-hi.archivable = false
-hi.Parent = game.Workspace
-hi:Play()
-wait()
-local spinSpeed = 30
-local Spin = Instance.new("BodyAngularVelocity")
-Spin.Name = "Spinning"
-Spin.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
-Spin.MaxTorque = Vector3.new(0, math.huge, 0)
-Spin.AngularVelocity = Vector3.new(0,spinSpeed,0)
-wait(3.5)
-while speaker.Character.Humanoid.Health > 0 do
-   wait(0)
-speaker.Character.Humanoid.HipHeight = speaker.Character.Humanoid.HipHeight + 0
-end
 end)
 
 about:Button("传送工具",function()
@@ -449,7 +460,7 @@ about:Button("透视",function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP'))()
 end)
 
-about:Button("苏脚本铁拳打人",function()
+about:Button("铁拳打人",function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt'),true))()
 end)
 
@@ -466,6 +477,130 @@ end)
 
 about:Button("安全区",function()
 loadstring(game:HttpGet("https://pastebin.com/raw/rmPfWVU3"))()
+end)
+
+about:Button("正常范围",function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/jiNwDbCN"))()
+end)
+
+about:Button("中等范围",function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/x13bwrFb"))()
+end)
+
+about:Button("高级范围",function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/KKY9EpZU"))()
+end)
+
+local Players = about:Dropdown("选择玩家", 'Dropdown', dropdown, function(v)
+    playernamedied = v
+end)
+
+game.Players.ChildAdded:Connect(function(player)
+    dropdown[player.UserId] = player.Name
+    Players:AddOption(player.Name)
+end)
+
+game.Players.ChildRemoved:Connect(function(player)
+    Players:RemoveOption(player.Name)
+    for k, v in pairs(dropdown) do
+        if v == player.Name then
+            dropdown[k] = nil
+        end
+    end
+end)
+
+about:Button("传送到玩家旁边", function()
+    local HumRoot = game.Players.LocalPlayer.Character.HumanoidRootPart
+    local tp_player = game.Players:FindFirstChild(playernamedied)
+    if tp_player and tp_player.Character and tp_player.Character.HumanoidRootPart then
+        HumRoot.CFrame = tp_player.Character.HumanoidRootPart.CFrame + Vector3.new(0, 3, 0)
+        Notify("大司马", "已经传送到玩家身边", "rbxassetid://", 5)
+    else
+        Notify("大司马", "无法传送 玩家已消失", "rbxassetid://", 5)
+    end
+end)
+
+about:Button("把玩家传送过来", function()
+    local HumRoot = game.Players.LocalPlayer.Character.HumanoidRootPart
+    local tp_player = game.Players:FindFirstChild(playernamedied)
+    if tp_player and tp_player.Character and tp_player.Character.HumanoidRootPart then
+        tp_player.Character.HumanoidRootPart.CFrame = HumRoot.CFrame + Vector3.new(0, 3, 0)
+        Notify("洛天依", "已传送过来", "rbxassetid://", 5)
+    else
+        Notify("洛天依", "无法传送 玩家已消失", "rbxassetid://", 5)
+    end
+end)
+
+about:Toggle("查看玩家", 'Toggleflag', false, function(state)
+    if state then
+        game:GetService('Workspace').CurrentCamera.CameraSubject =
+            game:GetService('Players'):FindFirstChild(playernamedied).Character.Humanoid
+            Notify("洛天依", "已开启", "rbxassetid://", 5)
+    else
+        Notify("洛天依", "已关闭", "rbxassetid://", 5)
+        local lp = game.Players.LocalPlayer
+        game:GetService('Workspace').CurrentCamera.CameraSubject = lp.Character.Humanoid
+    end
+end)
+
+local UITab4 = win:Tab("『FE』",'7734068321')
+
+local about = UITab4:section("『FE』",true)
+
+about:Button("FE C00lgui", function()
+loadstring(game:GetObjects("rbxassetid://8127297852")[1].Source)()
+end)
+
+about:Button("FE 1x1x1x1", function()
+loadstring(game:HttpGet(('https://pastebin.com/raw/JipYNCht'),true))()
+end)
+
+about:Button("FE大长腿", function()
+    loadstring(game:HttpGet('https://gist.githubusercontent.com/1BlueCat/7291747e9f093555573e027621f08d6e/raw/23b48f2463942befe19d81aa8a06e3222996242c/FE%2520Da%2520Feets'))()
+end)
+
+about:Button("FE用头", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/BK4Q0DfU"))()
+end)
+
+about:Button("复仇者", function()
+    loadstring(game:HttpGet(('https://pastefy.ga/iGyVaTvs/raw'),true))()
+end)
+
+about:Button("鼠标", function()
+    loadstring(game:HttpGet(('https://pastefy.ga/V75mqzaz/raw'),true))()
+end)
+
+about:Button("变怪物", function()
+    loadstring(game:HttpGetAsync("https://pastebin.com/raw/jfryBKds"))()
+end)
+
+about:Button("香蕉枪", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MrNeRD0/Doors-Hack/main/BananaGunByNerd.lua"))()
+end)
+
+about:Button("超长🐔巴", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/ESWSFND7", true))()
+end)
+
+about:Button("操人", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/XiaoYunCN/UWU/main/AHAJAJAKAK/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A.LUA", true))()
+end)
+
+about:Button("FE动画中心", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/GamingScripter/Animation-Hub/main/Animation%20Gui", true))()
+end)
+
+about:Button("FE变玩家", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/XR4sGcgJ"))()
+end)
+
+about:Button("FE猫娘R63", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Tescalus/Pendulum-Hubs-Source/main/Pendulum%20Hub%20V5.lua"))()
+end)
+
+about:Button("FE", function()
+    loadstring(game:HttpGet('https://pastefy.ga/a7RTi4un/raw'))()
 end)
 
 local UITab3 = win:Tab("脚本合集",'16060333448')
