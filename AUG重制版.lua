@@ -238,7 +238,7 @@ end
 Start = tick()
 Heartbeat:Connect(HeartbeatUpdate)
 
-local ui = loadstring(game:HttpGet("https://raw.githubusercontent.com/djdu894/ui/refs/heads/main/ui.lua"))();		
+local ui = loadstring(game:HttpGet("https://raw.githubusercontent.com/whenheer/iuop/refs/heads/main/Protected_7843953596944453.lua"))();		
 local win = ui:new("AUG脚本")
 --
 local UITab1 = win:Tab("信息",'16060333448')
@@ -803,6 +803,281 @@ about:Button("灵魂出窍",function()
 loadstring(game:HttpGet("https://pastebin.com/raw/ahK5jRxM"))()
 end)
 
+about:Button("AUG飞行",function()
+local main = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local up = Instance.new("TextButton")
+local down = Instance.new("TextButton")
+local onof = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+local plus = Instance.new("TextButton")
+local speed = Instance.new("TextLabel")
+local mine = Instance.new("TextButton")
+local closebutton = Instance.new("TextButton")
+local mini = Instance.new("TextButton")
+local mini2 = Instance.new("TextButton")
+
+main.Name = "main"
+main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+main.ResetOnSpawn = false
+
+Frame.Parent = main
+Frame.BackgroundColor3 = Color3.fromRGB(163, 255, 137)
+Frame.BorderColor3 = Color3.fromRGB(103, 221, 213)
+Frame.Position = UDim2.new(0.100320168, 0, 0.379746825, 0)
+Frame.Size = UDim2.new(0, 190, 0, 57)
+
+up.Name = "up"
+up.Parent = Frame
+up.BackgroundColor3 = Color3.fromRGB(79, 255, 152)
+up.Size = UDim2.new(0, 44, 0, 28)
+up.Font = Enum.Font.SourceSans
+up.Text = "上"
+up.TextColor3 = Color3.fromRGB(0, 0, 0)
+up.TextSize = 14.000
+
+down.Name = "down"
+down.Parent = Frame
+down.BackgroundColor3 = Color3.fromRGB(215, 255, 121)
+down.Position = UDim2.new(0, 0, 0.491228074, 0)
+down.Size = UDim2.new(0, 44, 0, 28)
+down.Font = Enum.Font.SourceSans
+down.Text = "下"
+down.TextColor3 = Color3.fromRGB(0, 0, 0)
+down.TextSize = 14.000
+
+onof.Name = "onof"
+onof.Parent = Frame
+onof.BackgroundColor3 = Color3.fromRGB(255, 249, 74)
+onof.Position = UDim2.new(0.702823281, 0, 0.491228074, 0)
+onof.Size = UDim2.new(0, 56, 0, 28)
+onof.Font = Enum.Font.SourceSans
+onof.Text = "飞行"
+onof.TextColor3 = Color3.fromRGB(0, 0, 0)
+onof.TextSize = 14.000
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(242, 60, 255)
+TextLabel.Position = UDim2.new(0.469327301, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 100, 0, 28)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "AUG飞行"
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+plus.Name = "plus"
+plus.Parent = Frame
+plus.BackgroundColor3 = Color3.fromRGB(133, 145, 255)
+plus.Position = UDim2.new(0.231578946, 0, 0, 0)
+plus.Size = UDim2.new(0, 45, 0, 28)
+plus.Font = Enum.Font.SourceSans
+plus.Text = "+"
+plus.TextColor3 = Color3.fromRGB(0, 0, 0)
+plus.TextScaled = true
+plus.TextSize = 14.000
+plus.TextWrapped = true
+
+speed.Name = "speed"
+speed.Parent = Frame
+speed.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
+speed.Position = UDim2.new(0.468421042, 0, 0.491228074, 0)
+speed.Size = UDim2.new(0, 44, 0, 28)
+speed.Font = Enum.Font.SourceSans
+speed.Text = "1"
+speed.TextColor3 = Color3.fromRGB(0, 0, 0)
+speed.TextScaled = true
+speed.TextSize = 14.000
+speed.TextWrapped = true
+
+mine.Name = "mine"
+mine.Parent = Frame
+mine.BackgroundColor3 = Color3.fromRGB(123, 255, 247)
+mine.Position = UDim2.new(0.231578946, 0, 0.491228074, 0)
+mine.Size = UDim2.new(0, 45, 0, 29)
+mine.Font = Enum.Font.SourceSans
+mine.Text = "-"
+mine.TextColor3 = Color3.fromRGB(0, 0, 0)
+mine.TextScaled = true
+mine.TextSize = 14.000
+mine.TextWrapped = true
+
+closebutton.Name = "Close"
+closebutton.Parent = main.Frame
+closebutton.BackgroundColor3 = Color3.fromRGB(225, 25, 0)
+closebutton.Font = "SourceSans"
+closebutton.Size = UDim2.new(0, 45, 0, 28)
+closebutton.Text = "关闭"
+closebutton.TextSize = 30
+closebutton.Position =  UDim2.new(0, 0, -1, 27)
+
+mini.Name = "minimize"
+mini.Parent = main.Frame
+mini.BackgroundColor3 = Color3.fromRGB(192, 150, 230)
+mini.Font = "SourceSans"
+mini.Size = UDim2.new(0, 45, 0, 28)
+mini.Text = "隐藏"
+mini.TextSize = 40
+mini.Position = UDim2.new(0, 44, -1, 27)
+
+mini2.Name = "minimize2"
+mini2.Parent = main.Frame
+mini2.BackgroundColor3 = Color3.fromRGB(192, 150, 230)
+mini2.Font = "SourceSans"
+mini2.Size = UDim2.new(0, 45, 0, 28)
+mini2.Text = "+"
+mini2.TextSize = 40
+mini2.Position = UDim2.new(0, 44, -1, 57)
+mini2.Visible = false
+
+speeds = 1
+
+local speaker = game:GetService("Players").LocalPlayer
+
+local chr = game.Players.LocalPlayer.Character
+local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+
+nowe = false
+
+game:GetService("StarterGui"):SetCore("SendNotification", { 
+	Title = "AUG";
+	Text = "By me_ozone and Quandale The Dinglish XII#3550";
+	Icon = "rbxthumb://type=Asset&id=5107182114&w=150&h=150"})
+Duration = 5;
+
+Frame.Active = true -- main = gui
+Frame.Draggable = true
+
+onof.MouseButton1Down:connect(function()
+
+	if nowe == true then
+		nowe = false
+
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
+		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+	end
+
+
+
+
+	if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
+
+
+
+		local plr = game.Players.LocalPlayer
+		local torso = plr.Character.Torso
+		local flying = true
+		local deb = true
+		local ctrl = {f = 0, b = 0, l = 0, r = 0}
+		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		local maxspeed = 50
+		local speed = 0
+
+
+		local bg = Instance.new("BodyGyro", torso)
+		bg.P = 9e4
+		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		bg.cframe = torso.CFrame
+		local bv = Instance.new("BodyVelocity", torso)
+		bv.velocity = Vector3.new(0,0.1,0)
+		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+		if nowe == true then
+			plr.Character.Humanoid.PlatformStand = true
+		end
+		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
+			game:GetService("RunService").RenderStepped:Wait()
+
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+				speed = speed+.5+(speed/maxspeed)
+				if speed > maxspeed then
+					speed = maxspeed
+				end
+			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+				speed = speed-1
+				if speed < 0 then
+					speed = 0
+				end
+			end
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+			else
+				bv.velocity = Vector3.new(0,0,0)
+			end
+			--	game.Players.LocalPlayer.Character.Animate.Disabled = true
+			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+		end
+		ctrl = {f = 0, b = 0, l = 0, r = 0}
+		lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		speed = 0
+		bg:Destroy()
+		bv:Destroy()
+		plr.Character.Humanoid.PlatformStand = false
+		game.Players.LocalPlayer.Character.Animate.Disabled = false
+		tpwalking = false
+
+
+
+
+	else
+		local plr = game.Players.LocalPlayer
+		local UpperTorso = plr.Character.UpperTorso
+		local flying = true
+		local deb = true
+		local ctrl = {f = 0, b = 0, l = 0, r = 0}
+		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		local maxspeed = 50
+		local speed = 0
+
+
+		local bg = Instance.new("BodyGyro", UpperTorso)
+		bg.P = 9e4
+		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		bg.cframe = UpperTorso.CFrame
+		local bv = Instance.new("BodyVelocity", UpperTorso)
+		bv.velocity = Vector3.new(0,0.1,0)
+		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+		if nowe == true then
+			plr.Character.Humanoid.PlatformStand = true
+		end
+		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
+			wait()
+
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+				speed = speed+.5+(speed/maxspeed)
+				if speed > maxspeed then
+					speed = maxspeed
+				end
+			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+				speed = speed-1
+				if speed < 0 then
+					speed = 0
+				end
+			end
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFr
+
 about:Button("点击传送工具",function()
 mouse = game.Players.LocalPlayer:GetMouse() tool = Instance.new("Tool") tool.RequiresHandle = false tool.Name = "[FE] TELEPORT TOOL" tool.Activated:connect(function() local pos = mouse.Hit+Vector3.new(0,2.5,0) pos = CFrame.new(pos.X,pos.Y,pos.Z) game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos end) tool.Parent = game.Players.LocalPlayer.Backpack
 end)
@@ -1318,452 +1593,225 @@ about:Button("死亡球2",function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/LOLking123456/Ball1/main/Death"))()
 end)
 
-local UITab30 = win:Tab("『汽车经销大亨』",'7734068321')
+local UITab3 = win:Tab("3008",'16060333448')
 
-local about = UITab30:section("『汽车经销大亨』",true)
+local about = UITab3:section("3008",true)
 
-about:Button("刷星星",function()
-loadstring(game:HttpGet("https://scriptblox.com/raw/LIMITED!-Car-Dealership-Tycoon-Moon-Team-16181"))()
+about:Button("1",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Viserromero/Antex/master/SCP3008'))()
 end)
 
-about:Button("汽车经销大亨1",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/IExpIoit/Script/main/Car%20Dealership%20Tycoon.lua"))()
+local UITab3 = win:Tab("51区",'16060333448')
+
+local about = UITab3:section("51区",true)
+
+about:Button("1",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Ghostmode65/STK-Bo2/master/STK-Menus/v7/STv7-Engine.txt'))()
 end)
 
-about:Button("汽车经销大亨2",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/03sAlt/BlueLockSeason2/main/README.md"))()
+local UITab3 = win:Tab("恐鬼",'16060333448')
+
+local about = UITab3:section("恐鬼",true)
+
+about:Button("1",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dzq1311056/Ytftyf/refs/heads/main/Protected_5206640540929836.lua"))()
 end)
 
-about:Button("汽车经销大亨3",function()
-loadstring(game:HttpGet("https://pastefy.app/5o594Q0i/raw"))()
+local UITab3 = win:Tab("俄",'16060333448')
+
+local about = UITab3:section("俄",true
+
+about:Button("1",function()
+loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\115\99\114\105\112\116\115\46\118\105\115\117\114\117\115\46\100\101\118\47\111\104\105\111\47\115\111\117\114\99\101"))()
 end)
 
-local UITab31 = win:Tab("『兵工厂』",'7734068321')
-
-local about = UITab31:section("『兵工厂』",true)
-
-about:Button("兵工厂1",function()
-loadstring(game:HttpGet("https://pastefy.app/2YdrWHxV/raw"))()
+about:Button("2",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/IIIlll1ll1/Cracks/main/AdvancedLogic_Crack.lua"))()
 end)
 
-about:Button("兵工厂2",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/GamingScripter/Darkrai-X/main/Games/Arsenal/MainFile"))()
+about:Button("3",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Mstir16/legocheats/main/archive/Ohio./script.lua"))()
 end)
 
-about:Button("兵工厂3",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubArsenal"))()
-end)
-
-about:Button("兵工厂4",function()
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/RandomAdamYT/DarkHub/master/Init'), true))()
-end)
-
-local UITab32 = win:Tab("『超级足球联赛』",'7734068321')
-
-local about = UITab32:section("『超级足球联赛』",true)
-
-about:Button("超级足球联赛1",function()
-loadstring(game:HttpGet"https://raw.githubusercontent.com/xtrey10x/xtrey10x-hub/main/neo")()
-end)
-
-about:Button("超级足球联赛2",function()
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/8fdf7c482d3b3d108ccdb282a7fc35e2.lua"))()
-end)
-
-local UITab33 = win:Tab("『钓鱼模拟器』",'7734068321')
-
-local about = UITab33:section("『钓鱼模拟器』",true)
-
-about:Button("钓鱼模拟器1",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/bebedi15/SRM-Scripts/main/Bebedi9960/SRMHub"))()
-end)
-
-about:Button("汉化",function()
-loadstring(game:HttpGet("https://pastefy.app/ptl5LG8c/raw"))()
-end)
-
-about:Button("钓鱼模拟器2",function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/reddythedev/Reddy-Hub/main/_Loader'))()
-end)
-
-local UITab34 = win:Tab("『战争大亨』",'7734068321')
-
-local about = UITab34:section("『战争大亨』",true)
-
-about:Button("一枪秒人",function()
-loadstring(game:HttpGet('https://pastebin.com/raw/6b4XEjQF'))()
-end)
-
-about:Button("战争大亨1",function()
-loadstring(game:HttpGet'https://raw.githubusercontent.com/Macintosh1983/ChillHubMain/main/ChillHubOilWarfareTycoon.lua')()
-end)
-
-about:Button("战争大亨2",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nivex123456/War-Tycoon/main/Script"))() 
-end)
-
-about:Button("战争大亨3",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MariyaFurmanova/Library/main/WarTycoon", true))() 
-end)
-
-about:Button("战争大亨4",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/nici002018/GNHub/master/GNHub.lua", true))()
-end)
-
-about:Button("战争大亨5",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MariyaFurmanova/Library/main/WarTycoon", true))()
-end)
-
-about:Button("战争大亨6",function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/WarTycoon'))()
-end)
-
-about:Button("战争大亨7",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/megamoeus/UI-Engine-V2/main/OWTPublic"))()
-end)
-
-local UITab35 = win:Tab("『BF』",'7734068321')
-
-local about = UITab35:section("『BF』",true)
-
-about:Button("BF 『汉化』",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/XiaoYunCN/Xiao-Yun-UWU/main/%E6%B5%B7%E8%B4%BC%E7%8E%8Bbf.lua", true))()
-end)
-
-about:Button("最强",function()
-_G.HohoVersion = "v4"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()
-end)
-
-about:Button("最强",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/AkiraNus/UniquehubKak/main/FreeCr.Xenonhub"))()
-end)
-
-about:Button("刷怪",function()
-loadstring(game:HttpGet('https://rawscripts.net/raw/UPDATE-16-Blox-Fruits-Nub-V1-Hub-4583'))()
-end)
-
-about:Button("自动升级",function()
-loadstring(game:HttpGet"https://raw.githubusercontent.com/xDepressionx/Free-Script/main/AllScript.lua")()
-end)
-
-about:Button("自动箱子",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMael7/NewIceHub/main/Brookhaven"))()
-end)
-
-about:Button("找的",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RobloxScriptsExploit/Blox-Fruits/main/Ripper%20M"))()
-end)
-
-about:Button("超强",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Augustzyzx/UraniumMobile/main/UraniumKak.lua"))()
-end)
-
-about:Button("BF『HOHO脚本』1",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HohoV2/Free/BloxFruitFreeV3.lua"))()
-end)
-
-about:Button("BF『HOHO脚本』2",function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()
-end)
-
-local UITab8 = win:Tab("『Doors  门』",'7734068321')
-
-local about = UITab8:section("『门』",true)
-
-about:Button("最强汉化",function()
-loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\112\97\115\116\101\98\105\110\46\99\111\109\47\114\97\119\47\54\53\84\119\84\56\106\97"))()
-end)
-
-about:Button("最新",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/KINGHUB01/BlackKing-obf/main/Doors%20Blackking%20And%20BobHub"))()
-end)
-
-about:Button("DX",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/DXuwu/replicator-lol/main/dor.lua"))()
-end)
-
-about:Button("RP变怪",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ChronoAccelerator/Public-Scripts/main/Morphing/MorphScript.lua"))()
-end)
-
-about:Button("剪刀",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MrNeRD0/Doors-Hack/main/shears_done.lua"))()
-end)
-
-about:Button("十字架",function()
-loadstring(game:HttpGet("https://pastebin.com/raw/FCSyG6Th"))()
-end)
-
-about:Button("神圣炸弹",function()
-loadstring(game:HttpGet("https://pastebin.com/raw/u5B1UjGv"))()
-end)
-
-about:Button("吸铁石",function()
-loadstring(game:HttpGet("https://pastebin.com/raw/xHxGDp51"))()
-end)
-
-about:Button("刷怪变怪",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/cbhlyy/lyycbh/main/shuaguai"))()
-end)
-
-about:Button("变身",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ChronoAccelerator/Public-Scripts/main/Morphing/MorphScript.lua"))()
-end)
-
-local UITab11575 = win:Tab("『Door2』",'7734068321')
-
-local about = UITab11575:section("『Door2』",true)
-
-about:Button("DX",function()
-loadstring(game:HttpGet("https://github.com/DocYogurt/Main/raw/main/Scripts/DF2RW.lua"))()
-end)
-
-about:Button("汉化",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/XiaoFenHG/DOORS/main/Hydra.txt"))()
-end)
-
-about:Button("不知名",function()
-loadstring(game:HttpGet("https://github.com/DocYogurt/DOORS/raw/main/Loader.lua"))()
-end)
-
-about:Button("脚本",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/zuohongjian/bjb/main/ZS%20III", true))()
-end)
-
-local UITab9 = win:Tab("『俄亥俄州』",'7734068321')
-
-local about = UITab9:section("『俄亥俄州』",true)
-
-about:Button("印钞机",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/XTScripthub/Ohio/main/MoneyPrinterFinder"))()
-end)
-
-about:Button("传送加自动工作",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/LOLking123456/ohio/main/Roblox232"))()
-end)
-
-about:Button("YFHUB[修复版 用的是云ui]",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/nb/main/jm1051.lua"))()
-end)
-
-about:Button("杀戮光环",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/main/Games/Ohio"))()
-end)
-
-about:Button("死亡笔记",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/tt/main/%E6%AD%BB%E4%BA%A1%E7%AC%94%E8%AE%B0%20(1).txt"))()
-end)
-
-about:Button("俄亥俄州1英",function()
-loadstring(game:HttpGet("https://pastebin.com/raw/0MqfXpvY", true))()
-end)
-
-about:Button("俄亥俄州",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua"))()
-end)
-
-about:Button("俄亥俄州2英",function()
-loadstring(game:HttpGet('https://pastebin.com/raw/MyfCUnGK'))()
-end)
-
-about:Button("俄亥俄州3",function()
+about:Button("4",function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rxn-xyz/Ohio./main/Ohio.lua",true))()
 end)
 
-about:Button("俄亥俄州4",function()
-loadstring(game:HttpGet("https://pastefy.app/QbXPfsgC/raw"))()
+about:Button("5",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/main/Games/Ohio"))()
 end)
 
-about:Button("俄亥俄州5",function()
-loadstring(game:HttpGet("https://pastebin.com/raw/hkvHeHed",true))()
+local UITab18 = win:Tab("监狱人生",'7734068321')
+
+local about = UITab18:section("监狱人生",true)
+
+about:Toggle("自动杀所有人","text",false,function(state)
+if state then
+                print("Toggle On")
+                isAutoKillRunning = true
+                spawn(AutoKillLoop)
+                spawn(AutoJump) -- Start the automatic jump function
+            else
+                print("Toggle Off")
+                isAutoKillRunning = false
+            end
 end)
 
-about:Button("指令",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/longshulol/long/main/longshu/Ohio"))()
+about:Toggle("删除门🚪","text",false,function(state)
+if state then
+        print("Toggle On")
+        for i,v in pairs(workspace.Doors:GetChildren()) do
+             v.Parent = game:service"ReplicatedStorage".nikodoors
+    
+        end
+    else
+        print("Toggle Off")
+        for i,v in pairs(game:service"ReplicatedStorage".nikodoors:GetChildren()) do
+            v.Parent = workspace.Doors
+        end
+    end
 end)
 
-about:Label("在聊天框输入")
-about:Label("透开—透关")
-about:Label("追踪开—追踪关")
-about:Label("收钱开—收钱关")
-about:Label("收物开—收物关")
-about:Label("抢取款机开—抢取款机关")
-about:Label("抢银行开—抢银行关")
-about:Label("穿墙开—穿墙关")
-
-local UITab32 = win:Tab("『超级足球联赛』",'7734068321')
-
-local about = UITab32:section("『超级足球联赛』",true)
-
-about:Button("超级足球联赛1",function()
-loadstring(game:HttpGet"https://raw.githubusercontent.com/xtrey10x/xtrey10x-hub/main/neo")()
+about:Toggle("逮捕所有罪犯", function()
+    wait(0.1)
+	Player = game.Players.LocalPlayer
+	Pcf = Player.Character.HumanoidRootPart.CFrame
+	for i,v in pairs(game.Teams.Criminals:GetPlayers()) do
+		if v.Name ~= Player.Name then
+			local i = 10
+			repeat
+				wait()
+				i = i-1
+				game.Workspace.Remote.arrest:InvokeServer(v.Character.HumanoidRootPart)
+				Player.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1)
+			until i == 0
+		end
+	end
 end)
 
-about:Button("超级足球联赛2",function()
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/8fdf7c482d3b3d108ccdb282a7fc35e2.lua"))()
+about:Button("变成警察", function()
+workspace.Remote.TeamEvent:FireServer("Bright blue");
 end)
 
-local UITab33 = win:Tab("『钓鱼模拟器』",'7734068321')
-
-local about = UITab33:section("『钓鱼模拟器』",true)
-
-about:Button("钓鱼模拟器1",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/bebedi15/SRM-Scripts/main/Bebedi9960/SRMHub"))()
+about:Button("变成囚犯", function()
+workspace.Remote.TeamEvent:FireServer("Bright orange");
 end)
 
-about:Button("汉化",function()
-loadstring(game:HttpGet("https://pastefy.app/ptl5LG8c/raw"))()
+local MT = getrawmetatable(game)
+local __namecall = MT.__namecall
+setreadonly(MT, false)
+MT.__namecall = newcclosure(function(self, ...)
+    local Method = getnamecallmethod()
+    if Method == "FindPartOnRay" and not checkcaller() and tostring(getfenv(0).script) == "GunInterface" then
+        local Character = ClosestChar()
+        if Character then
+            return Character.Torso, Character.Torso.Position
+        end
+    end
+
+    return __namecall(self, ...)
+end)
+setreadonly(MT, true)
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 
-about:Button("钓鱼模拟器2",function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/reddythedev/Reddy-Hub/main/_Loader'))()
+about:Button("无敌模式",function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/LdTVujTA"))()
 end)
 
-local UITab34 = win:Tab("『战争大亨』",'7734068321')
-
-local about = UITab34:section("『战争大亨』",true)
-
-about:Button("一枪秒人",function()
-loadstring(game:HttpGet('https://pastebin.com/raw/6b4XEjQF'))()
+about:Button("杀死所有人",function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/kXjfpFPh"))()
+end)
+    
+about:Button("无敌神器（拿上范围秒杀）",function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/mSLiAZHk"))()
+end)
+    
+about:Button("变钢铁侠",function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/7prijqYH"))()
 end)
 
-about:Button("战争大亨1",function()
-loadstring(game:HttpGet'https://raw.githubusercontent.com/Macintosh1983/ChillHubMain/mainChillHubOilWarfareTycoon.lua')()
+about:Button("变死神",function()
+        loadstring(game:HttpGet("https://pastebin.com/ewv9bbRp"))()
+    end)
+    
+about:Button("变车模型",function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/zLe3e4BS"))()
 end)
 
-about:Button("战争大亨2",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nivex123456/War-Tycoon/main/Script"))() 
+about:Button("PRISONWARE V1.3",function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/PRISONWARE_v1.3.txt"))()
+ end)
+ 
+about:Button("红该 脚本",function()
+        loadstring(game:HttpGetAsync("https://pastebin.com/raw/fYMnAEeJ"))()
 end)
 
-about:Button("战争大亨3",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MariyaFurmanova/Library/main/WarTycoon", true))() 
+about:Button("Tiger脚本",function()
+        loadstring(game:HttpGet(("https://raw.githubusercontent.com/h17s3/TIGERADMIN/main/TIGERADMINSCRIPTFREE"), true))
 end)
 
-about:Button("战争大亨4",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/nici002018/GNHub/master/GNHub.lua", true))()
+about:Button("Moon脚本（不知道有什么用）",function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/IlikeyocutgHAH12/MoonUI-v10-/main/MoonUI%20v10"))()
 end)
 
-about:Button("战争大亨5",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MariyaFurmanova/Library/main/WarTycoon", true))()
+about:Button("1脚本",function()
+        -- This Script isn't mine credits to the owner.
+        -- Works on krnl,Synapse,Sirhurt And other.
+        loadstring(game:HttpGet("https://pastebin.com/raw/mHfK0Xk4", true))()
 end)
 
-about:Button("战争大亨6",function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/WarTycoon'))()
+about:Button("2脚本",function()
+        getgenv().http_request = http_request or request or (http and http.request) or syn.request
+        repeat
+        until http_request
+        loadstring(
+            http_request(
+                {
+                    Url = "https://raw.githubusercontent.com/alphaalt0409/WEIRDAPPLEBEEPANEL/main/weirdapplebee.lua",
+                    Method = "GET"
+                }
+            ).Body
+        )()
+    end)
+
+local about = UITab14:section("『传送』",false)
+
+about:Button("警卫室",function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(847.7261352539062, 98.95999908447266, 2267.387451171875)
 end)
 
-about:Button("战争大亨7",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/megamoeus/UI-Engine-V2/main/OWTPublic"))()
+about:Button("监狱室内",function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(919.2575073242188, 98.95999908447266, 2379.74169921875)
 end)
 
-local UITab35 = win:Tab("『BF』",'7734068321')
-
-local about = UITab35:section("『BF』",true)
-
-about:Button("BF 『汉化』",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/XiaoYunCN/Xiao-Yun-UWU/main/%E6%B5%B7%E8%B4%BC%E7%8E%8Bbf.lua", true))()
+about:Button("监狱室外",function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(760.6033325195312, 96.96992492675781, 2475.405029296875)
 end)
 
-about:Button("最强",function()
-_G.HohoVersion = "v4"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()
+about:Button("犯罪复活点",function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-937.5891723632812, 93.09876251220703, 2063.031982421875)
 end)
 
-about:Button("最强",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/AkiraNus/UniquehubKak/main/FreeCr.Xenonhub"))()
+about:Button("传送院子", function()
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(788.5759887695312, 97.99992370
+
+about:Button("监狱人生",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/PRISONWARE_v1.3.txt"))();
 end)
 
-about:Button("刷怪",function()
-loadstring(game:HttpGet('https://rawscripts.net/raw/UPDATE-16-Blox-Fruits-Nub-V1-Hub-4583'))()
+about:Button("监狱人生2",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/LiverMods/xRawnder/main/HubMoblie'))()
 end)
 
-about:Button("自动升级",function()
-loadstring(game:HttpGet"https://raw.githubusercontent.com/xDepressionx/Free-Script/main/AllScript.lua")()
+about:Button("监狱人生3",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/PRISONWARE_v1.3.txt"))();
 end)
 
-about:Button("自动箱子",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMael7/NewIceHub/main/Brookhaven"))()
-end)
-
-about:Button("找的",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RobloxScriptsExploit/Blox-Fruits/main/Ripper%20M"))()
-end)
-
-about:Button("超强",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Augustzyzx/UraniumMobile/main/UraniumKak.lua"))()
-end)
-
-about:Button("BF『HOHO脚本』1",function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HohoV2/Free/BloxFruitFreeV3.lua"))()
-end)
-
-about:Button("BF『HOHO脚本』2",function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()
-end)
-
-about:Label("卡密自己去DC")
-
-local UITab10 = win:Tab("『火箭发射模拟器』",'7734068321')
-
-local about = UITab10:section("『火箭发射模拟器』",true)
-
-about:Toggle("自动收集燃料", "ARL", false, function(ARL)
-    isFuelScoopEnabled = ARL while true do wait() if isFuelScoopEnabled then for i, h in pairs(game.Players.LocalPlayer.Character:GetChildren()) do if h:IsA("Tool") and h.Name == "FuelScoop" then h:Activate() end end end end
-end)
-about:Button("登上火箭", function()
-    game:GetService("ReplicatedStorage"):WaitForChild("BoardRocket"):FireServer()
-end)
-about:Button("将玩家从所有者座位移除", function()
-    game:GetService("ReplicatedStorage"):WaitForChild("RemovePlayer"):FireServer()
-end)
-
-about:Button("发射台岛", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-123.15931701660156, 2.7371432781219482, 3.491959810256958)
-end)
-about:Button("白云岛", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-76.13252258300781, 170.55825805664062, -60.4516716003418)
-end)
-about:Button("浮漂岛", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-66.51714324951172, 720.4866333007812, -5.391753196716309)
-end)
-about:Button("卫星岛", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-34.2462043762207, 1429.4990234375, 1.3739361763000488)
-end)
-about:Button("蜜蜂迷宫岛", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(6.5361199378967285, 3131.249267578125, -29.759048461914062)
-end)
-about:Button("月球人救援", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7.212917804718018, 5016.341796875, -19.815933227539062)
-end)
-about:Button("暗物质岛", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(68.43186950683594, 6851.94091796875, 7.890637397766113)
-end)
-about:Button("太空岩石岛", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(49.92888641357422, 8942.955078125, 8.674375534057617)
-end)
-about:Button("零号火星岛", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(54.44503402709961, 11270.0927734375, -1.273137092590332)
-end)
-about:Button("太空水晶小行星岛", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-11.579089164733887, 15295.6318359375, -27.54974365234375)
-end)
-about:Button("月球浆果岛", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-14.601255416870117, 18410.9609375, 0.9418511986732483)
-end)
-about:Button("铺路石岛", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3.272758960723877, 22539.494140625, 63.283935546875)
-end)
-about:Button("流星岛", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-45.515689849853516, 27961.560546875, -7.358333110809326)
-end)
-about:Button("升级岛", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2.7595248222351074, 33959.98828125, 53.93095397949219)
-end)
-
-about:Button("火箭发射模拟器1",function()
-loadstring(game:HttpGet("https://ayangwp.cn/api/v3/file/get/9245/%E7%8C%AB%E9%80%9A%E7%94%A8.txt?sign=hrWROZdVfK2mtJcIFa3Tvbl-TojP1C86_Zd3q03qttc%3D%3A0"))()
-end)
-
-about:Button("火箭发射模拟器2",function()
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/dizyhvh/rbx_scripts/main/321_blast_off_simulator')))()
+about:Button("监狱人生4",function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/h17s3/TIGERADMIN/main/TIGERADMINSCRIPTFREE'),true))()
 end)
