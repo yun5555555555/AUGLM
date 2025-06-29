@@ -206,16 +206,15 @@ Tabs.ButtonTab:Button({
 Tabs.ButtonTab:Divider()
 
 Tabs.ButtonTab:Button({
-    Title = "极速传奇",
+    Title = "速度传奇",
     Desc = "刷速度",
     Callback = function()
         local code = [[
-            local args = {
-                "collectOrb",
-                "Red Orb",
-                "City"
-            }
-            game:GetService("ReplicatedStorage").rEvents.orbEvent:FireServer(unpack(args))
+            local args = {"collectOrb", "Red Orb", "City"}
+            while true do
+                game:GetService("ReplicatedStorage").rEvents.orbEvent:FireServer(unpack(args))
+                task.wait(0.0001)
+            end
         ]]
         loadstring(code)()
     end
