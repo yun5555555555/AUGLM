@@ -206,12 +206,16 @@ Tabs.ButtonTab:Button({
 Tabs.ButtonTab:Divider()
 
 Tabs.ButtonTab:Button({
-    Title = "Execute Code",
-    Desc = "Execute custom Lua code",
+    Title = "极速传奇",
+    Desc = "刷速度",
     Callback = function()
         local code = [[
-            print("Hello from executed code!")
-            game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = 50
+            local args = {
+                "collectOrb",
+                "Red Orb",
+                "City"
+            }
+            game:GetService("ReplicatedStorage").rEvents.orbEvent:FireServer(unpack(args))
         ]]
         loadstring(code)()
     end
