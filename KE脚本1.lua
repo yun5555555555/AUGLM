@@ -330,599 +330,6 @@ Tabs.buyTab:Button({
 })
 
 Tabs.MainTab = Window:Section({Title = "生成99天", Opened = true})
-Tabs.automaticTab = Tabs.MainTab:Tab({ Title = "自动", Icon = "zap" })
-
-Window:About({
-    Title = "关于自动的",
-    Content = "很抱歉我们做不出来完整的",
-    Icon = "info",
-    Callback = function()
-        print("关于信息已显示")
-    end
-})
-
-Window:About({
-    Title = "关于自动1",
-    Content = "我们发现做不出来完整自动的比如自动吃或者攻击",
-    Icon = "info",
-    Callback = function()
-        print("关于信息已显示")
-    end
-})
-
-Window:About({
-    Title = "方法",
-    Content = "胡萝卜会自动拔出来可以自己拿起来吃",
-    Icon = "info",
-    Callback = function()
-        print("关于信息已显示")
-    end
-})
-
-Window:About({
-    Title = "方法2",
-    Content = "兔子和狼会持续传送只要点击屏幕就行了",
-    Icon = "info",
-    Callback = function()
-        print("关于信息已显示")
-    end
-})
-
-Tabs.automaticTab:Toggle({
-    Title = "自动拔胡萝卜",
-    Desc = "自动寻找胡萝卜",
-    Value = false,
-    Callback = function(state)
-        if state then
-            -- 开启自动收集
-            _G.AutoCollectCarrots = true
-            
-            -- 创建收集线程
-            coroutine.wrap(function()
-                local Players = game:GetService("Players")
-                local LocalPlayer = Players.LocalPlayer
-                local ReplicatedStorage = game:GetService("ReplicatedStorage")
-                
-                -- 配置参数
-                local CARROT_NAME = "Carrot"
-                local SEARCH_RADIUS = 50
-                local TELEPORT_OFFSET = Vector3.new(0, 3, 0)
-                local PICKUP_DELAY = 1
-                local CONSUME_RETRY_DELAY = 0.5
-                local MAX_CONSUME_RETRIES = 5
-                
-                -- 查找最近的胡萝卜
-                local function findNearestCarrot()
-                    local character = LocalPlayer.Character
-                    if not character or not character:FindFirstChild("HumanoidRootPart") then
-                        return nil
-                    end
-
-                    local hrp = character.HumanoidRootPart
-                    local closestCarrot = nil
-                    local minDistance = SEARCH_RADIUS + 1
-
-                    local function scan(parent)
-                        for _, item in ipairs(parent:GetChildren()) do
-                            if item.Name == CARROT_NAME and item:IsA("Model") then
-                                local primaryPart = item.PrimaryPart or item:FindFirstChildWhichIsA("BasePart")
-                                if primaryPart then
-                                    local distance = (primaryPart.Position - hrp.Position).Magnitude
-                                    if distance < minDistance then
-                                        closestCarrot = item
-                                        minDistance = distance
-                                    end
-                                end
-                            end
-                            scan(item)
-                        end
-                    end
-
-                    scan(workspace)
-                    return closestCarrot
-                end
-
-                -- 传送至胡萝卜位置
-                local function teleportToCarrot(carrot)
-                    if not carrot then return false end
-
-                    local character = LocalPlayer.Character
-                    if not character or not character:FindFirstChild("HumanoidRootPart") then
-                        return false
-                    end
-
-                    local hrp = character.HumanoidRootPart
-                    local carrotPart = carrot.PrimaryPart or carrot:FindFirstChildWhichIsA("BasePart")
-                    if not carrotPart then return false end
-
-                    local targetPos = carrotPart.Position + TELEPORT_OFFSET
-                    hrp.CFrame = CFrame.new(targetPos)
-                    return true
-                end
-
-                -- 消耗胡萝卜
-                local function consumeCarrotWithRetry()
-                    for retry = 1, MAX_CONSUME_RETRIES do
-                        local tempCarrot = ReplicatedStorage.TempStorage:FindFirstChild(CARROT_NAME)
-                        if not tempCarrot then
-                            wait(CONSUME_RETRY_DELAY)
-                        else
-                            local args = { tempCarrot }
-                            local success, response = pcall(function()
-                                return ReplicatedStorage.RemoteEvents.RequestConsumeItem:InvokeServer(unpack(args))
-                            end)
-
-                            if success then
-                                return true
-                            end
-                        end
-                    end
-                    return false
-                end
-
-                -- 主收集循环
-                while _G.AutoCollectCarrots do
-                    -- 1. 查找胡萝卜
-                    local carrot = findNearestCarrot()
-                    if carrot then
-                        -- 2. 传送
-                        if teleportToCarrot(carrot) then
-                            wait(0.005)  -- 等待传送稳定
-                            
-                            -- 3. 拾取
-                            local pickupArgs = { carrot }
-                            local pickupSuccess = pcall(function()
-                                ReplicatedStorage.RemoteEvents.RequestStartDraggingItem:FireServer(unpack(pickupArgs))
-                            end)
-
-                            if pickupSuccess then
-                                wait(PICKUP_DELAY)  -- 关键等待！
-                                
-                                -- 4. 消耗
-                                consumeCarrotWithRetry()
-                            end
-                        end
-                    end
-                    wait(1)  -- 每次循环间隔
-                end
-            end)()
-            
-            WindUI:Notify({
-                Title = "自动收集已开启",
-                Content = "正在自动收集胡萝卜",
-                Duration = 3
-            })
-        else
-            -- 关闭自动收集
-            _G.AutoCollectCarrots = false
-            WindUI:Notify({
-                Title = "自动收集已关闭",
-                Content = "已停止自动收集胡萝卜",
-                Duration = 3
-            })
-        end
-    end
-})
-
-Tabs.automaticTab:Toggle({
-    Title = "寻找兔子",
-    Desc = "自动寻找附近的兔子",
-    Value = false,
-    Callback = function(state)
-        if state then
-            -- 开启自动攻击
-            _G.AutoAttackBunny = true
-            
-            -- 创建攻击线程
-            coroutine.wrap(function()
-                local Players = game:GetService("Players")
-                local LocalPlayer = Players.LocalPlayer
-                local ReplicatedStorage = game:GetService("ReplicatedStorage")
-                
-                -- 配置参数
-                local TELEPORT_OFFSET = Vector3.new(0, 3, 0)
-                local ATTACK_INTERVAL = 0.1
-                local TELEPORT_INTERVAL = 0.3
-                local FACE_INTERVAL = 0.2
-                local BUNNY_NAME = "Bunny"
-                local MAX_DISTANCE = 100
-                
-                -- 确保角色存在
-                local function ensureCharacter()
-                    repeat
-                        if not LocalPlayer.Character then
-                            LocalPlayer.CharacterAdded:Wait()
-                        end
-                        if not LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                            wait(0.5)
-                        end
-                    until LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                    return LocalPlayer.Character
-                end
-                
-                -- 寻找最近的活着的兔子
-                local function findAliveBunny()
-                    local closestBunny = nil
-                    local closestDistance = MAX_DISTANCE + 1
-                    
-                    for _, char in ipairs(workspace.Characters:GetChildren()) do
-                        if char.Name == BUNNY_NAME and char:FindFirstChild("HumanoidRootPart") then
-                            local humanoid = char:FindFirstChildOfClass("Humanoid")
-                            if humanoid and humanoid.Health > 0 then
-                                local distance = (char.HumanoidRootPart.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-                                if distance < closestDistance then
-                                    closestBunny = char
-                                    closestDistance = distance
-                                end
-                            end
-                        end
-                    end
-                    
-                    return closestBunny
-                end
-                
-                -- 攻击兔子的函数
-                local function attackBunny(bunny)
-                    local weapon = LocalPlayer.Inventory:FindFirstChild("Old Axe") or LocalPlayer.Character:FindFirstChild("Old Axe")
-                    if weapon then
-                        local args = {
-                            [1] = "FireAllClients",
-                            [2] = bunny,
-                            [3] = weapon
-                        }
-                        ReplicatedStorage.RemoteEvents.PlayEnemyHitSound:FireServer(unpack(args))
-                    end
-                end
-                
-                -- 使角色面向目标
-                local function faceTarget(target)
-                    if target and target:FindFirstChild("HumanoidRootPart") then
-                        local character = LocalPlayer.Character
-                        if character and character:FindFirstChild("HumanoidRootPart") then
-                            local targetPos = target.HumanoidRootPart.Position
-                            local charPos = character.HumanoidRootPart.Position
-                            local lookAt = CFrame.new(charPos, Vector3.new(targetPos.X, charPos.Y, targetPos.Z))
-                            character.HumanoidRootPart.CFrame = lookAt
-                        end
-                    end
-                end
-                
-                -- 主攻击循环
-                local character = ensureCharacter()
-                local lastTeleportTime = 0
-                local lastAttackTime = 0
-                local lastFaceTime = 0
-                
-                while _G.AutoAttackBunny do
-                    local now = tick()
-                    local bunny = findAliveBunny()
-                    
-                    if bunny and bunny:FindFirstChild("HumanoidRootPart") then
-                        -- 持续面向目标逻辑
-                        if now - lastFaceTime >= FACE_INTERVAL then
-                            faceTarget(bunny)
-                            lastFaceTime = now
-                        end
-                        
-                        -- 持续传送逻辑
-                        if now - lastTeleportTime >= TELEPORT_INTERVAL then
-                            local offset = TELEPORT_OFFSET
-                            local bunnyForward = bunny.HumanoidRootPart.CFrame.LookVector
-                            local teleportPos = bunny.HumanoidRootPart.Position + (bunnyForward * -2) + Vector3.new(0, offset.Y, 0)
-                            character.HumanoidRootPart.CFrame = CFrame.new(teleportPos)
-                lastTeleportTime = now
-            end
-            
-            -- 持续攻击逻辑
-            if now - lastAttackTime >= ATTACK_INTERVAL then
-                attackBunny(bunny)
-                lastAttackTime = now
-            end
-        else
-            wait(1) -- 没有找到兔子时等待1秒
-        end
-        
-        wait(0.05) -- 主循环小等待防止卡死
-    end
-end
-
--- 安全启动
-local attackThread = coroutine.create(function()
-    local success, err = pcall(attackLoop)
-    if not success then
-        warn("攻击循环出错:", err)
-    end
-end)
-
-coroutine.resume(attackThread)
-
--- 提供停止函数(可选)
-function stopAttack()
-    if attackThread then
-        coroutine.close(attackThread)
-    end
-end
-
--- 在自动标签中添加狼攻击功能
-Tabs.automaticTab:Toggle({
-    Title = "自动攻击狼",
-    Desc = "自动寻找附近的狼并攻击",
-    Value = false,
-    Callback = function(state)
-        if state then
-            -- 开启自动攻击
-            _G.AutoAttackWolf = true
-            
-            -- 创建攻击协程
-            coroutine.wrap(function()
-                -- 局部变量定义
-                local Players = game:GetService("Players")
-                local LocalPlayer = Players.LocalPlayer
-                local ReplicatedStorage = game:GetService("ReplicatedStorage")
-                
-                -- 配置参数
-                local TELEPORT_OFFSET = Vector3.new(0, 3, 0)
-                local ATTACK_INTERVAL = 0.1
-                local TELEPORT_INTERVAL = 0.3
-                local FACE_INTERVAL = 0.2
-                local WOLF_NAME = "Wolf"
-                local MAX_DISTANCE = 100
-                
-                -- 确保角色存在的函数
-                local function ensureCharacter()
-                    repeat
-                        if not LocalPlayer.Character then
-                            LocalPlayer.CharacterAdded:Wait()
-                        end
-                        if not LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                            task.wait(0.5)
-                        end
-                    until LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                    return LocalPlayer.Character
-                end
-                
-                -- 寻找最近的活着的狼
-                local function findAliveWolf()
-                    local closestWolf = nil
-                    local closestDistance = MAX_DISTANCE + 1
-                    
-                    for _, char in ipairs(workspace.Characters:GetChildren()) do
-                        if char.Name == WOLF_NAME and char:FindFirstChild("HumanoidRootPart") then
-                            local humanoid = char:FindFirstChildOfClass("Humanoid")
-                            if humanoid and humanoid.Health > 0 then
-                                local distance = (char.HumanoidRootPart.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-                                if distance < closestDistance then
-                                    closestWolf = char
-                                    closestDistance = distance
-                                end
-                            end
-                        end
-                    end
-                    
-                    return closestWolf
-                end
-                
-                -- 攻击狼的函数
-                local function attackWolf(wolf)
-                    local weapon = LocalPlayer.Inventory:FindFirstChild("Old Axe") or LocalPlayer.Character:FindFirstChild("Old Axe")
-                    if weapon then
-                        local args = {
-                            [1] = "FireAllClients",
-                            [2] = wolf,
-                            [3] = weapon
-                        }
-                        ReplicatedStorage.RemoteEvents.PlayEnemyHitSound:FireServer(unpack(args))
-                    end
-                end
-                
-                -- 使角色面向目标
-                local function faceTarget(target)
-                    if target and target:FindFirstChild("HumanoidRootPart") then
-                        local character = LocalPlayer.Character
-                        if character and character:FindFirstChild("HumanoidRootPart") then
-                            local targetPos = target.HumanoidRootPart.Position
-                            local charPos = character.HumanoidRootPart.Position
-                            local lookAt = CFrame.new(charPos, Vector3.new(targetPos.X, charPos.Y, targetPos.Z))
-                            character.HumanoidRootPart.CFrame = lookAt
-                        end
-                    end
-                end
-                
-                -- 主攻击循环
-                local character = ensureCharacter()
-                local lastTeleportTime = 0
-                local lastAttackTime = 0
-                local lastFaceTime = 0
-                
-                while _G.AutoAttackWolf do
-                    local now = tick()
-                    local wolf = findAliveWolf()
-                    
-                    if wolf and wolf:FindFirstChild("HumanoidRootPart") then
-                        -- 持续面向目标逻辑
-                        if now - lastFaceTime >= FACE_INTERVAL then
-                            faceTarget(wolf)
-                            lastFaceTime = now
-                        end
-                        
-                        -- 持续传送逻辑
-                        if now - lastTeleportTime >= TELEPORT_INTERVAL then
-                            local offset = TELEPORT_OFFSET
-                            local wolfForward = wolf.HumanoidRootPart.CFrame.LookVector
-                            local teleportPos = wolf.HumanoidRootPart.Position + (wolfForward * -2) + Vector3.new(0, offset.Y, 0)
-                            character.HumanoidRootPart.CFrame = CFrame.new(teleportPos)
-                            lastTeleportTime = now
-                        end
-                        
-                        -- 持续攻击逻辑
-                        if now - lastAttackTime >= ATTACK_INTERVAL then
-                            attackWolf(wolf)
-                            lastAttackTime = now
-                        end
-                    else
-                        task.wait(1) -- 没有找到狼时等待1秒
-                    end
-                    
-                    task.wait(0.05) -- 主循环小等待防止卡死
-                end
-            end)()
-            
-            WindUI:Notify({
-                Title = "自动攻击已开启",
-                Content = "正在自动寻找并攻击狼",
-                Duration = 3
-            })
-        else
-            -- 关闭自动攻击
-            _G.AutoAttackWolf = false
-            WindUI:Notify({
-                Title = "自动攻击已关闭",
-                Content = "已停止自动攻击狼",
-                Duration = 3
-            })
-        end
-    end
-})
-
-Tabs.SpeedTab:Toggle({
-    Title = "自动传送到树",
-    Desc = "自动寻找附近的树",
-    Value = false,
-    Callback = function(state)
-        if state then
-            -- 开启自动攻击
-            _G.AutoAttackBunny = true
-            
-            -- 创建攻击线程
-            coroutine.wrap(function()
-                local Players = game:GetService("Players")
-                local LocalPlayer = Players.LocalPlayer
-                local ReplicatedStorage = game:GetService("ReplicatedStorage")
-                
-                -- 配置参数
-                local TELEPORT_OFFSET = Vector3.new(0, 3, 0)
-                local ATTACK_INTERVAL = 0.1
-                local TELEPORT_INTERVAL = 0.3
-                local FACE_INTERVAL = 0.2
-                local BUNNY_NAME = "Wolf"
-                local MAX_DISTANCE = 100
-                
-                -- 确保角色存在
-                local function ensureCharacter()
-                    repeat
-                        if not LocalPlayer.Character then
-                            LocalPlayer.CharacterAdded:Wait()
-                        end
-                        if not LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                            wait(0.5)
-                        end
-                    until LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                    return LocalPlayer.Character
-                end
-                
-                -- 寻找最近的活着的兔子
-                local function findAliveBunny()
-                    local closestBunny = nil
-                    local closestDistance = MAX_DISTANCE + 1
-                    
-                    for _, char in ipairs(workspace.Characters:GetChildren()) do
-                        if char.Name == BUNNY_NAME and char:FindFirstChild("HumanoidRootPart") then
-                            local humanoid = char:FindFirstChildOfClass("Humanoid")
-                            if humanoid and humanoid.Health > 0 then
-                                local distance = (char.HumanoidRootPart.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-                                if distance < closestDistance then
-                                    closestBunny = char
-                                    closestDistance = distance
-                                end
-                            end
-                        end
-                    end
-                    
-                    return closestBunny
-                end
-                
-                -- 攻击兔子的函数
-                local function attackBunny(bunny)
-                    local weapon = LocalPlayer.Inventory:FindFirstChild("Old Axe") or LocalPlayer.Character:FindFirstChild("Old Axe")
-                    if weapon then
-                        local args = {
-                            [1] = "FireAllClients",
-                            [2] = bunny,
-                            [3] = weapon
-                        }
-                        ReplicatedStorage.RemoteEvents.PlayEnemyHitSound:FireServer(unpack(args))
-                    end
-                end
-                
-                -- 使角色面向目标
-                local function faceTarget(target)
-                    if target and target:FindFirstChild("HumanoidRootPart") then
-                        local character = LocalPlayer.Character
-                        if character and character:FindFirstChild("HumanoidRootPart") then
-                            local targetPos = target.HumanoidRootPart.Position
-                            local charPos = character.HumanoidRootPart.Position
-                            local lookAt = CFrame.new(charPos, Vector3.new(targetPos.X, charPos.Y, targetPos.Z))
-                            character.HumanoidRootPart.CFrame = lookAt
-                        end
-                    end
-                end
-                
-                -- 主攻击循环
-                local character = ensureCharacter()
-                local lastTeleportTime = 0
-                local lastAttackTime = 0
-                local lastFaceTime = 0
-                
-                while _G.AutoAttackBunny do
-                    local now = tick()
-                    local bunny = findAliveBunny()
-                    
-                    if bunny and bunny:FindFirstChild("HumanoidRootPart") then
-                        -- 持续面向目标逻辑
-                        if now - lastFaceTime >= FACE_INTERVAL then
-                            faceTarget(bunny)
-                            lastFaceTime = now
-                        end
-                        
-                        -- 持续传送逻辑
-                        if now - lastTeleportTime >= TELEPORT_INTERVAL then
-                            local offset = TELEPORT_OFFSET
-                            local bunnyForward = bunny.HumanoidRootPart.CFrame.LookVector
-                            local teleportPos = bunny.HumanoidRootPart.Position + (bunnyForward * -2) + Vector3.new(0, offset.Y, 0)
-                            character.HumanoidRootPart.CFrame = CFrame.new(teleportPos)
-                lastTeleportTime = now
-            end
-            
-            -- 持续攻击逻辑
-            if now - lastAttackTime >= ATTACK_INTERVAL then
-                attackBunny(bunny)
-                lastAttackTime = now
-            end
-        else
-            wait(1) -- 没有找到兔子时等待1秒
-        end
-        
-        wait(0.05) -- 主循环小等待防止卡死
-    end
-end
-
--- 安全启动
-local attackThread = coroutine.create(function()
-    local success, err = pcall(attackLoop)
-    if not success then
-        warn("攻击循环出错:", err)
-    end
-end)
-
-coroutine.resume(attackThread)
-
--- 提供停止函数(可选)
-function stopAttack()
-    if attackThread then
-        coroutine.close(attackThread)
-    end
-end
-
 Tabs.ForestTab = Tabs.MainTab:Tab({ Title = "物品透视", Icon = "zap" })
 
 -- 添加透视按钮
@@ -1936,8 +1343,196 @@ Tabs.ForestTab:Toggle({
 
 Tabs.ForestTab = Tabs.MainTab:Tab({ Title = "传送", Icon = "zap" })
 
+Tabs.SpeedTab:Button({
+    Title = "传送到胡萝卜",
+    Desc = "直接传送到胡萝卜旁边",
+    Callback = function()
+        local targetName = "Carrot"  -- 直接在这里改物品名称
+        
+        local character = game.Players.LocalPlayer.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            local hrp = character.HumanoidRootPart
+            
+            -- 简单搜索最近的匹配物品
+            for _, item in pairs(workspace:GetDescendants()) do
+                if item.Name == targetName and item:IsA("BasePart") then
+                    -- 直接传送（保持3个单位高度偏移）
+                    hrp.CFrame = CFrame.new(item.Position + Vector3.new(0, 3, 0))
+                    break  -- 找到第一个就传送
+                end
+            end
+        end
+    end
+})
 
+Tabs.SetTab = Tabs.MainTab:Tab({ Title = "透视设置", Icon = "zap" })
 
+-- 定义默认颜色和透明度（全局变量，只定义一次）
+local fillColor = Color3.fromRGB(0, 255, 0)  -- 默认绿色
+local outlineColor = Color3.new(1, 1, 1)     -- 默认白色
+local transparency = 0.4                     -- 默认40%透明度
+
+-- 1. 填充颜色选择器
+Tabs.SetTab:Colorpicker({
+    Title = "填充颜色",
+    Default = fillColor,
+    Callback = function(color)
+        fillColor = color
+        -- 更新所有已存在的高亮
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item:FindFirstChild("ESP_Highlight") then
+                item.ESP_Highlight.FillColor = color
+            end
+        end
+    end
+})
+
+-- 2. 轮廓颜色选择器
+Tabs.SetTab:Colorpicker({
+    Title = "轮廓颜色",
+    Default = outlineColor,
+    Callback = function(color)
+        outlineColor = color
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item:FindFirstChild("ESP_Highlight") then
+                item.ESP_Highlight.OutlineColor = color
+            end
+        end
+    end
+})
+
+-- 3. 透明度滑块
+Tabs.SetTab:Slider({
+    Title = "透明度",
+    Value = {Min = 0, Max = 1, Default = 0.4},
+    Callback = function(value)
+        transparency = value
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item:FindFirstChild("ESP_Highlight") then
+                item.ESP_Highlight.FillTransparency = value
+            end
+        end
+    end
+})
+
+-- 4. 关闭所有透视按钮
+Tabs.SetTab:Button({
+    Title = "关闭所有透视",
+    Desc = "清除所有高亮效果",
+    Callback = function()
+        -- 清除现有高亮
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item:FindFirstChild("ESP_Highlight") then
+                item.ESP_Highlight:Destroy()
+            end
+        end
+        
+        -- 断开连接
+        if _G.ESPConnection then
+            _G.ESPConnection:Disconnect()
+            _G.ESPConnection = nil
+        end
+        
+        WindUI:Notify({
+            Title = "透视已关闭",
+            Content = "所有高亮效果已清除",
+            Duration = 3
+        })
+    end
+})
+
+-- 高亮创建函数（放在标签外部，作为全局辅助函数）
+local function createHighlight(item)
+    if not item or not item.Parent then return end
+    
+    -- 移除旧的高亮
+    if item:FindFirstChild("ESP_Highlight") then
+        item.ESP_Highlight:Destroy()
+    end
+    
+    -- 创建新高亮
+    local highlight = Instance.new("Highlight")
+    highlight.Name = "ESP_Highlight"
+    highlight.Adornee = item
+    highlight.FillColor = fillColor
+    highlight.OutlineColor = outlineColor
+    highlight.FillTransparency = transparency
+    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    highlight.Parent = item
+end
+
+-- 在透视人物标签中添加玩家透视功能
+Tabs.ForestTab:Toggle({
+    Title = "透视玩家",
+    Desc = "高亮显示所有玩家角色",
+    Value = false,
+    Callback = function(state)
+        if state then
+            -- 开启透视
+            _G.PlayerESP = true
+            
+            -- 颜色配置（本地玩家和其他玩家不同颜色）
+            local localPlayer = game:GetService("Players").LocalPlayer
+            local localColor = Color3.fromRGB(0, 255, 0)  -- 绿色表示自己
+            local otherColor = Color3.fromRGB(255, 0, 0)  -- 红色表示其他玩家
+            
+            -- 创建高亮函数
+            local function highlightPlayer(player)
+                if player.Character then
+                    -- 移除旧的高亮（如果存在）
+                    if player.Character:FindFirstChild("PlayerESP_Highlight") then
+                        player.Character.PlayerESP_Highlight:Destroy()
+                    end
+                    
+                    -- 创建新高亮
+                    local highlight = Instance.new("Highlight")
+                    highlight.Name = "PlayerESP_Highlight"
+                    highlight.Adornee = player.Character
+                    highlight.FillColor = (player == localPlayer) and localColor or otherColor
+                    highlight.OutlineColor = Color3.new(1, 1, 1)
+                    highlight.FillTransparency = 0.5
+                    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                    highlight.Parent = player.Character
+                end
+            end
+            
+            -- 立即高亮所有现有玩家
+            for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+                highlightPlayer(player)
+            end
+            
+            -- 监听新玩家加入
+            _G.PlayerAddedConnection = game:GetService("Players").PlayerAdded:Connect(highlightPlayer)
+            
+            -- 监听玩家角色变化
+            _G.CharacterAddedConnection = game:GetService("Players").PlayerAdded:Connect(function(player)
+                player.CharacterAdded:Connect(function(character)
+                    if _G.PlayerESP then
+                        highlightPlayer(player)
+                    end
+                end)
+            end)
+        else
+            -- 关闭透视
+            _G.PlayerESP = false
+            
+            -- 移除所有高亮
+            for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+                if player.Character and player.Character:FindFirstChild("PlayerESP_Highlight") then
+                    player.Character.PlayerESP_Highlight:Destroy()
+                end
+            end
+            
+            -- 断开事件监听
+            if _G.PlayerAddedConnection then
+                _G.PlayerAddedConnection:Disconnect()
+            end
+            if _G.CharacterAddedConnection then
+                _G.CharacterAddedConnection:Disconnect()
+            end
+        end
+    end
+})
 
 Window:OnClose(function()
     print("UI closed.")
