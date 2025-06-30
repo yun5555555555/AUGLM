@@ -396,8 +396,8 @@ Tabs.NinjaTab:Button({
     end
 })
 
-Tabs.MainTab = Window:Section({Title = "极速传奇", Opened = true})
-    Tabs.ForestTab = Tabs.MainTab:Tab({ Title = "刷", Icon = "zap" })
+Tabs.MainTab = Window:Section({Title = "生成99天", Opened = true})
+    Tabs.ForestTab = Tabs.MainTab:Tab({ Title = "透视设置", Icon = "zap" })
 
 -- 1. 高亮填充颜色 (主色)
 local fillColor = Color3.fromRGB(0, 255, 0)  -- 默认绿色
@@ -471,7 +471,7 @@ Tabs.ForestTab = Tabs.MainTab:Tab({ Title = "物品透视", Icon = "zap" })
 -- 添加透视按钮
 Tabs.ForestTab:Button({
     Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Desc = "显示所有胡萝卜",
     Callback = function()
         local targetItemName = "Carrot"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -518,8 +518,8 @@ Tabs.ForestTab:Button({
 })
 
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视坏风扇",
+    Desc = "显示所有坏风扇",
     Callback = function()
         local targetItemName = "Broken Fan"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -565,59 +565,9 @@ Tabs.ForestTab:Button({
     end
 })
 
-Tabs.ForestTab = Tabs.MainTab:Tab({ Title = "收集物品", Icon = "zap" })
-
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
-    Callback = function()
-        local targetItemName = ""  -- 要透视的物品名称
-        local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
-        local fillTransparency = 0.4  -- 透明度
-        
-        -- 清除现有高亮
-        for _, item in pairs(workspace:GetDescendants()) do
-            if item:FindFirstChild("ESP_Highlight") then
-                item.ESP_Highlight:Destroy()
-            end
-        end
-        
-        -- 创建新透视
-        local function createESP(item)
-            if item.Name == targetItemName then
-                local highlight = Instance.new("Highlight")
-                highlight.Name = "ESP_Highlight"
-                highlight.Adornee = item
-                highlight.FillColor = highlightColor
-                highlight.FillTransparency = fillTransparency
-                highlight.OutlineColor = Color3.new(1, 1, 1)
-                highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-                highlight.Parent = item
-            end
-        end
-        
-        -- 立即扫描全图
-        for _, item in pairs(workspace:GetDescendants()) do
-            createESP(item)
-        end
-        
-        -- 监听新生成的物品
-        _G.ESPConnection = workspace.DescendantAdded:Connect(function(item)
-            task.wait(0.1)  -- 等待模型加载
-            createESP(item)
-        end)
-        
-        WindUI:Notify({
-            Title = "透视已激活",
-            Content = "正在高亮显示所有 "..targetItemName,
-            Duration = 3
-        })
-    end
-})
-
-Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视煤炭",
+    Desc = "高亮显示所有煤炭",
     Callback = function()
         local targetItemName = "Coal"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -664,8 +614,8 @@ Tabs.ForestTab:Button({
 })
 
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视物品箱",
+    Desc = "高亮显示所有物品箱",
     Callback = function()
         local targetItemName = "Item Chest"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -712,8 +662,8 @@ Tabs.ForestTab:Button({
 })
 
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视燃料罐",
+    Desc = "高亮显示所有燃料罐",
     Callback = function()
         local targetItemName = "Fuel Canister"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -760,8 +710,8 @@ Tabs.ForestTab:Button({
 })
 
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视熟肉块",
+    Desc = "高亮显示所有熟肉块",
     Callback = function()
         local targetItemName = "Cooked Morsel"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -808,8 +758,8 @@ Tabs.ForestTab:Button({
 })
 
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视轮胎",
+    Desc = "高亮显示所有轮胎",
     Callback = function()
         local targetItemName = "Tyre"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -856,8 +806,8 @@ Tabs.ForestTab:Button({
 })
 
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视金属板",
+    Desc = "高亮显示所有金属板",
     Callback = function()
         local targetItemName = "Sheet Metal"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -904,8 +854,8 @@ Tabs.ForestTab:Button({
 })
 
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视步枪弹药",
+    Desc = "高亮显示所有步枪弹药",
     Callback = function()
         local targetItemName = "Rifle Ammo"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -952,8 +902,8 @@ Tabs.ForestTab:Button({
 })
 
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视左轮手枪弹药",
+    Desc = "高亮显示所有左轮手枪弹药",
     Callback = function()
         local targetItemName = "Revolver Ammo"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -1000,8 +950,8 @@ Tabs.ForestTab:Button({
 })
 
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视旧收音机",
+    Desc = "高亮显示所有旧收音机",
     Callback = function()
         local targetItemName = "Old Radio"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -1048,8 +998,8 @@ Tabs.ForestTab:Button({
 })
 
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视狼",
+    Desc = "高亮显示所有狼",
     Callback = function()
         local targetItemName = "Wolf"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -1096,8 +1046,8 @@ Tabs.ForestTab:Button({
 })
 
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视兔子",
+    Desc = "高亮显示所有兔子",
     Callback = function()
         local targetItemName = "Bunny"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -1144,8 +1094,8 @@ Tabs.ForestTab:Button({
 })
 
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视螺栓",
+    Desc = "高亮显示所有螺栓",
     Callback = function()
         local targetItemName = "Bolt"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
@@ -1192,10 +1142,298 @@ Tabs.ForestTab:Button({
 })
 
 Tabs.ForestTab:Button({
-    Title = "透视胡萝卜",
-    Desc = "高亮显示所有胡萝卜",
+    Title = "透视浆果",
+    Desc = "高亮显示所有浆果",
     Callback = function()
         local targetItemName = "Berry"  -- 要透视的物品名称
+        local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
+        local fillTransparency = 0.4  -- 透明度
+        
+        -- 清除现有高亮
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item:FindFirstChild("ESP_Highlight") then
+                item.ESP_Highlight:Destroy()
+            end
+        end
+        
+        -- 创建新透视
+        local function createESP(item)
+            if item.Name == targetItemName then
+                local highlight = Instance.new("Highlight")
+                highlight.Name = "ESP_Highlight"
+                highlight.Adornee = item
+                highlight.FillColor = highlightColor
+                highlight.FillTransparency = fillTransparency
+                highlight.OutlineColor = Color3.new(1, 1, 1)
+                highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                highlight.Parent = item
+            end
+        end
+        
+        -- 立即扫描全图
+        for _, item in pairs(workspace:GetDescendants()) do
+            createESP(item)
+        end
+        
+        -- 监听新生成的物品
+        _G.ESPConnection = workspace.DescendantAdded:Connect(function(item)
+            task.wait(0.1)  -- 等待模型加载
+            createESP(item)
+        end)
+        
+        WindUI:Notify({
+            Title = "透视已激活",
+            Content = "正在高亮显示所有 "..targetItemName,
+            Duration = 3
+        })
+    end
+})
+
+Tabs.ForestTab:Button({
+    Title = "透视步枪",
+    Desc = "高亮显示所有步枪",
+    Callback = function()
+        local targetItemName = "Rifle"  -- 要透视的物品名称
+        local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
+        local fillTransparency = 0.4  -- 透明度
+        
+        -- 清除现有高亮
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item:FindFirstChild("ESP_Highlight") then
+                item.ESP_Highlight:Destroy()
+            end
+        end
+        
+        -- 创建新透视
+        local function createESP(item)
+            if item.Name == targetItemName then
+                local highlight = Instance.new("Highlight")
+                highlight.Name = "ESP_Highlight"
+                highlight.Adornee = item
+                highlight.FillColor = highlightColor
+                highlight.FillTransparency = fillTransparency
+                highlight.OutlineColor = Color3.new(1, 1, 1)
+                highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                highlight.Parent = item
+            end
+        end
+        
+        -- 立即扫描全图
+        for _, item in pairs(workspace:GetDescendants()) do
+            createESP(item)
+        end
+        
+        -- 监听新生成的物品
+        _G.ESPConnection = workspace.DescendantAdded:Connect(function(item)
+            task.wait(0.1)  -- 等待模型加载
+            createESP(item)
+        end)
+        
+        WindUI:Notify({
+            Title = "透视已激活",
+            Content = "正在高亮显示所有 "..targetItemName,
+            Duration = 3
+        })
+    end
+})
+
+Tabs.ForestTab:Button({
+    Title = "透视左轮手枪",
+    Desc = "高亮显示所有左轮手枪",
+    Callback = function()
+        local targetItemName = "Revolver"  -- 要透视的物品名称
+        local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
+        local fillTransparency = 0.4  -- 透明度
+        
+        -- 清除现有高亮
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item:FindFirstChild("ESP_Highlight") then
+                item.ESP_Highlight:Destroy()
+            end
+        end
+        
+        -- 创建新透视
+        local function createESP(item)
+            if item.Name == targetItemName then
+                local highlight = Instance.new("Highlight")
+                highlight.Name = "ESP_Highlight"
+                highlight.Adornee = item
+                highlight.FillColor = highlightColor
+                highlight.FillTransparency = fillTransparency
+                highlight.OutlineColor = Color3.new(1, 1, 1)
+                highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                highlight.Parent = item
+            end
+        end
+        
+        -- 立即扫描全图
+        for _, item in pairs(workspace:GetDescendants()) do
+            createESP(item)
+        end
+        
+        -- 监听新生成的物品
+        _G.ESPConnection = workspace.DescendantAdded:Connect(function(item)
+            task.wait(0.1)  -- 等待模型加载
+            createESP(item)
+        end)
+        
+        WindUI:Notify({
+            Title = "透视已激活",
+            Content = "正在高亮显示所有 "..targetItemName,
+            Duration = 3
+        })
+    end
+})
+
+Tabs.ForestTab:Button({
+    Title = "透视兔子脚",
+    Desc = "高亮显示所有兔子脚",
+    Callback = function()
+        local targetItemName = "Bunny Foot"  -- 要透视的物品名称
+        local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
+        local fillTransparency = 0.4  -- 透明度
+        
+        -- 清除现有高亮
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item:FindFirstChild("ESP_Highlight") then
+                item.ESP_Highlight:Destroy()
+            end
+        end
+        
+        -- 创建新透视
+        local function createESP(item)
+            if item.Name == targetItemName then
+                local highlight = Instance.new("Highlight")
+                highlight.Name = "ESP_Highlight"
+                highlight.Adornee = item
+                highlight.FillColor = highlightColor
+                highlight.FillTransparency = fillTransparency
+                highlight.OutlineColor = Color3.new(1, 1, 1)
+                highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                highlight.Parent = item
+            end
+        end
+        
+        -- 立即扫描全图
+        for _, item in pairs(workspace:GetDescendants()) do
+            createESP(item)
+        end
+        
+        -- 监听新生成的物品
+        _G.ESPConnection = workspace.DescendantAdded:Connect(function(item)
+            task.wait(0.1)  -- 等待模型加载
+            createESP(item)
+        end)
+        
+        WindUI:Notify({
+            Title = "透视已激活",
+            Content = "正在高亮显示所有 "..targetItemName,
+            Duration = 3
+        })
+    end
+})
+
+Tabs.ForestTab:Button({
+    Title = "透视椅子",
+    Desc = "高亮显示所有椅子",
+    Callback = function()
+        local targetItemName = "Chair"  -- 要透视的物品名称
+        local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
+        local fillTransparency = 0.4  -- 透明度
+        
+        -- 清除现有高亮
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item:FindFirstChild("ESP_Highlight") then
+                item.ESP_Highlight:Destroy()
+            end
+        end
+        
+        -- 创建新透视
+        local function createESP(item)
+            if item.Name == targetItemName then
+                local highlight = Instance.new("Highlight")
+                highlight.Name = "ESP_Highlight"
+                highlight.Adornee = item
+                highlight.FillColor = highlightColor
+                highlight.FillTransparency = fillTransparency
+                highlight.OutlineColor = Color3.new(1, 1, 1)
+                highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                highlight.Parent = item
+            end
+        end
+        
+        -- 立即扫描全图
+        for _, item in pairs(workspace:GetDescendants()) do
+            createESP(item)
+        end
+        
+        -- 监听新生成的物品
+        _G.ESPConnection = workspace.DescendantAdded:Connect(function(item)
+            task.wait(0.1)  -- 等待模型加载
+            createESP(item)
+        end)
+        
+        WindUI:Notify({
+            Title = "透视已激活",
+            Content = "正在高亮显示所有 "..targetItemName,
+            Duration = 3
+        })
+    end
+})
+
+Tabs.ForestTab:Button({
+    Title = "透视手电筒",
+    Desc = "高亮显示所有手电筒",
+    Callback = function()
+        local targetItemName = "Old Flashlight"  -- 要透视的物品名称
+        local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
+        local fillTransparency = 0.4  -- 透明度
+        
+        -- 清除现有高亮
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item:FindFirstChild("ESP_Highlight") then
+                item.ESP_Highlight:Destroy()
+            end
+        end
+        
+        -- 创建新透视
+        local function createESP(item)
+            if item.Name == targetItemName then
+                local highlight = Instance.new("Highlight")
+                highlight.Name = "ESP_Highlight"
+                highlight.Adornee = item
+                highlight.FillColor = highlightColor
+                highlight.FillTransparency = fillTransparency
+                highlight.OutlineColor = Color3.new(1, 1, 1)
+                highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                highlight.Parent = item
+            end
+        end
+        
+        -- 立即扫描全图
+        for _, item in pairs(workspace:GetDescendants()) do
+            createESP(item)
+        end
+        
+        -- 监听新生成的物品
+        _G.ESPConnection = workspace.DescendantAdded:Connect(function(item)
+            task.wait(0.1)  -- 等待模型加载
+            createESP(item)
+        end)
+        
+        WindUI:Notify({
+            Title = "透视已激活",
+            Content = "正在高亮显示所有 "..targetItemName,
+            Duration = 3
+        })
+    end
+})
+
+Tabs.ForestTab:Button({
+    Title = "透视木头",
+    Desc = "高亮显示所有木头",
+    Callback = function()
+        local targetItemName = "Log"  -- 要透视的物品名称
         local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
         local fillTransparency = 0.4  -- 透明度
         
