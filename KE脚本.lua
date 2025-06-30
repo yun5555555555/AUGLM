@@ -125,7 +125,7 @@ Tabs.SpeedTab:Toggle({
         pcall(function()
             local character = game:GetService("Players").LocalPlayer.Character
             if character and character:FindFirstChild("Humanoid") then
-                character.Humanoid.WalkSpeed = state and 1000000 or 10000
+                character.Humanoid.WalkSpeed = state and 1000000 or 16
             end
         end)
     end
@@ -396,8 +396,8 @@ Tabs.NinjaTab:Button({
     end
 })
 
-Tabs.MainTab = Window:Section({Title = "活到99天", Opened = true})
-Tabs.ForestTab:Section({Title = "透视颜色设置", Opened = true})
+Tabs.MainTab = Window:Section({Title = "极速传奇", Opened = true})
+    Tabs.ForestTab = Tabs.MainTab:Tab({ Title = "刷", Icon = "zap" })
 
 -- 1. 高亮填充颜色 (主色)
 local fillColor = Color3.fromRGB(0, 255, 0)  -- 默认绿色
@@ -466,11 +466,7 @@ end
     Tabs.SpeedTab = Tabs.MainTab:Tab({ Title = "透视人物", Icon = "zap" })
 
 
-
-Tabs.ForestTab = Tabs.MainTab:Tab({ Title = "透视物品", Icon = "zap" })
-
--- 在"透视物品"标签页中添加以下代码
-Tabs.NinjaTab:Section({Title = "物品透视功能", Opened = true})
+Tabs.ForestTab = Tabs.MainTab:Tab({ Title = "物品透视", Icon = "zap" })
 
 -- 添加透视按钮
 Tabs.ForestTab:Button({
