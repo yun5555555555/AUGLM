@@ -69,7 +69,7 @@ Window:CreateTopbarButton("MyCustomButton1", "bird", function() print("clicked 1
 Window:CreateTopbarButton("MyCustomButton3", "battery-plus", function() Window:ToggleFullscreen() end, 989)
 
 Window:EditOpenButton({
-    Title = "KEKE脚本",
+    Title = "KE脚本",
     Icon = "monitor",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 2,
@@ -115,9 +115,9 @@ Tabs.SpeedTab:Button({
         loadstring(code)()
     end
 })
-Tabs.SpeedTab = Tabs.MainTab:Tab({ Title = "修改", Icon = "zap" })
+Tabs.ModifyTab = Tabs.MainTab:Tab({ Title = "修改", Icon = "zap" })
 
-Tabs.SpeedTab:Toggle({
+Tabs.ModifyTab:Toggle({
     Title = "启用速度加速",
     Value = true,
     Callback = function(state) 
@@ -131,7 +131,7 @@ Tabs.SpeedTab:Toggle({
     end
 })
 
-Tabs.SpeedTab:Slider({
+Tabs.ModifyTab:Slider({
     Title = "速度设置",
     Value = {Min = 16, Max = 100000000, Default = 10000},
     Callback = function(value) 
@@ -145,7 +145,7 @@ Tabs.SpeedTab:Slider({
     end
 })
 
-Tabs.SpeedTab:Toggle({
+Tabs.ModifyTab:Toggle({
     Title = "启用超级跳",
     Value = false, 
     Callback = function(state) 
@@ -162,7 +162,7 @@ Tabs.SpeedTab:Toggle({
     end
 })
 
-Tabs.SpeedTab:Slider({
+Tabs.ModifyTab:Slider({
     Title = "跳跃高度设置",
     Desc = "设置跳跃高度",
     Value = {
@@ -183,9 +183,9 @@ Tabs.SpeedTab:Slider({
     end
 })
 
-Tabs.SpeedTab = Tabs.MainTab:Tab({ Title = "传送", Icon = "zap" })
+Tabs.DeliverTab = Tabs.MainTab:Tab({ Title = "传送", Icon = "zap" })
 
-Tabs.SpeedTab:Button({
+Tabs.DeliverTab:Button({
     Title = "传送到城市",
     Desc = "传送到主城区",
     Callback = function()
@@ -196,7 +196,7 @@ Tabs.SpeedTab:Button({
     end
 })
 
-Tabs.SpeedTab:Button({
+Tabs.DeliverTab:Button({
     Title = "传送到雪城",
     Desc = "传送到冰雪区域",
     Callback = function()
@@ -207,7 +207,7 @@ Tabs.SpeedTab:Button({
     end
 })
 
-Tabs.SpeedTab:Button({
+Tabs.DeliverTab:Button({
     Title = "传送到火山",
     Desc = "传送到火山区域",
     Callback = function()
@@ -218,7 +218,7 @@ Tabs.SpeedTab:Button({
     end
 })
 
-Tabs.SpeedTab:Button({
+Tabs.DeliverTab:Button({
     Title = "传送到公路",
     Desc = "传送到高速公路",
     Callback = function()
@@ -229,9 +229,9 @@ Tabs.SpeedTab:Button({
     end
 })
 
-Tabs.SpeedTab:Section({Title = "属性修改", Opened = true})
+Tabs.AttributeTab:Section({Title = "属性修改", Opened = true})
 
-Tabs.SpeedTab:Input({
+Tabs.AttributeTab:Input({
     Title = "修改经验值",
     Placeholder = "输入经验值",
     Callback = function(arg)
@@ -242,7 +242,7 @@ Tabs.SpeedTab:Input({
     end
 })
 
-Tabs.SpeedTab:Input({
+Tabs.AttributeTab:Input({
     Title = "修改等级",
     Placeholder = "输入等级",
     Callback = function(arg)
@@ -253,7 +253,7 @@ Tabs.SpeedTab:Input({
     end
 })
 
-Tabs.SpeedTab:Input({
+Tabs.AttributeTab:Input({
     Title = "修改比赛数",
     Placeholder = "输入比赛数",
     Callback = function(arg)
@@ -264,7 +264,7 @@ Tabs.SpeedTab:Input({
     end
 })
 
-Tabs.SpeedTab:Input({
+Tabs.AttributeTab:Input({
     Title = "修改圈数",
     Placeholder = "输入圈数",
     Callback = function(arg)
@@ -275,7 +275,7 @@ Tabs.SpeedTab:Input({
     end
 })
 
-Tabs.SpeedTab:Input({
+Tabs.AttributeTab:Input({
     Title = "修改重生次数",
     Placeholder = "输入重生次数",
     Callback = function(arg)
@@ -286,7 +286,7 @@ Tabs.SpeedTab:Input({
     end
 })
 
-Tabs.SpeedTab:Input({
+Tabs.AttributeTab:Input({
     Title = "修改步数",
     Placeholder = "输入步数",
     Callback = function(arg)
@@ -297,7 +297,7 @@ Tabs.SpeedTab:Input({
     end
 })
 
-Tabs.SpeedTab:Input({
+Tabs.AttributeTab:Input({
     Title = "修改尾迹容量",
     Placeholder = "输入容量",
     Callback = function(arg)
@@ -308,7 +308,7 @@ Tabs.SpeedTab:Input({
     end
 })
 
-Tabs.SpeedTab:Input({
+Tabs.AttributeTab:Input({
     Title = "修改宝石数量",
     Placeholder = "输入宝石数量",
     Callback = function(arg)
@@ -368,9 +368,9 @@ Tabs.NinjaTab:Toggle({
     end
 })
 
-Tabs.NinjaTab = Tabs.MainTab:Tab({ Title = "自动购买", Icon = "zap" })
+Tabs.buyTab = Tabs.MainTab:Tab({ Title = "自动购买", Icon = "zap" })
 
-Tabs.NinjaTab:Button({
+Tabs.buyTab:Button({
     Title = "购买电竹剑",
     Desc = "购买电竹剑",
     Callback = function()
@@ -383,7 +383,7 @@ Tabs.NinjaTab:Button({
     end
 })
 
-Tabs.NinjaTab:Button({
+Tabs.buyTab:Button({
     Title = "购买超级竹剑",
     Desc = "购买超级竹剑",
     Callback = function()
@@ -397,7 +397,7 @@ Tabs.NinjaTab:Button({
 })
 
 Tabs.MainTab = Window:Section({Title = "生成99天", Opened = true})
-    Tabs.ForestTab = Tabs.MainTab:Tab({ Title = "透视设置", Icon = "zap" })
+    Tabs.SetTab = Tabs.MainTab:Tab({ Title = "透视设置", Icon = "zap" })
 
     local fillColor = Color3.fromRGB(0, 255, 0)  -- 默认绿色
     Tabs.ForestTab:Colorpicker({
@@ -445,7 +445,7 @@ Tabs.MainTab = Window:Section({Title = "生成99天", Opened = true})
     })
 
     -- 4. 添加关闭所有透视的按钮
-    Tabs.ForestTab:Button({
+    Tabs.SetTab:Button({
         Title = "关闭所有透视",
         Desc = "清除所有高亮效果",
         Callback = function()
@@ -489,10 +489,45 @@ Tabs.MainTab = Window:Section({Title = "生成99天", Opened = true})
     end
 end
 
-Tabs.ForestTab = Tabs.MainTab:Tab({ Title = "自动>", Icon = "zap" })
+Tabs.automaticTab = Tabs.MainTab:Tab({ Title = "自动", Icon = "zap" })
 
--- 在极速传奇的刷标签中添加胡萝卜自动收集功能
-Tabs.ForestTab:Toggle({
+Window:About({
+    Title = "关于自动的",
+    Content = "很抱歉我们做不出来完整的",
+    Icon = "info",
+    Callback = function()
+        print("关于信息已显示")
+    end
+})
+
+Window:About({
+    Title = "关于自动1",
+    Content = "我们发现做不出来完整自动的比如自动吃或者攻击",
+    Icon = "info",
+    Callback = function()
+        print("关于信息已显示")
+    end
+})
+
+Window:About({
+    Title = "方法",
+    Content = "胡萝卜会自动拔出来可以自己拿起来吃",
+    Icon = "info",
+    Callback = function()
+        print("关于信息已显示")
+    end
+})
+
+Window:About({
+    Title = "方法2",
+    Content = "兔子和狼会持续传送只要点击屏幕就行了",
+    Icon = "info",
+    Callback = function()
+        print("关于信息已显示")
+    end
+})
+
+Tabs.automaticTab:Toggle({
     Title = "自动拔胡萝卜",
     Desc = "自动寻找胡萝卜",
     Value = false,
@@ -628,7 +663,7 @@ Tabs.ForestTab:Toggle({
     end
 })
 
-Tabs.ForestTab:Toggle({
+Tabs.automaticTab:Toggle({
     Title = "寻找兔子",
     Desc = "自动寻找附近的兔子",
     Value = false,
@@ -767,8 +802,8 @@ function stopAttack()
     end
 end
 
--- 在极速传奇的刷标签中添加兔子攻击功能
-Tabs.ForestTab:Toggle({
+
+Tabs.automaticTab:Toggle({
     Title = "自动攻击狼",
     Desc = "自动寻找附近的狼",
     Value = false,
