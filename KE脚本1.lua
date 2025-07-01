@@ -1441,7 +1441,7 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
+    Title = "透视步枪",
     Desc = "高亮显示所有步枪",
     Callback = function(state)
         if state then
@@ -1554,7 +1554,133 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示左轮手枪脚",
+                Content = "已停止高亮显示左轮手枪",
+                Duration = 3
+            })
+        end
+    end
+})
+
+Tabs.ForestTab:Toggle({
+    Title = "透视绷带",
+    Desc = "高亮显示所有绷带",
+    Callback = function(state)
+        if state then
+            -- 开启透视
+            local targetItemName = "Bandage"  -- 要透视的物品名称
+            local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
+            local fillTransparency = 0.4  -- 透明度
+            
+            -- 创建新透视
+            local function createESP(item)
+                if item.Name == targetItemName and not item:FindFirstChild("ESP_Highlight") then
+                    local highlight = Instance.new("Highlight")
+                    highlight.Name = "ESP_Highlight"
+                    highlight.Adornee = item
+                    highlight.FillColor = highlightColor
+                    highlight.FillTransparency = fillTransparency
+                    highlight.OutlineColor = Color3.new(1, 1, 1)
+                    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                    highlight.Parent = item
+                end
+            end
+            
+            -- 立即扫描全图
+            for _, item in pairs(workspace:GetDescendants()) do
+                createESP(item)
+            end
+            
+            -- 监听新生成的物品
+            _G.ESPConnection = workspace.DescendantAdded:Connect(function(item)
+                task.wait(0.1)  -- 等待模型加载
+                createESP(item)
+            end)
+            
+            WindUI:Notify({
+                Title = "透视已激活",
+                Content = "正在高亮显示所有 "..targetItemName,
+                Duration = 3
+            })
+        else
+            -- 关闭透视时只移除当前物品的高亮
+            for _, item in pairs(workspace:GetDescendants()) do
+                if item.Name == "Revolver" and item:FindFirstChild("ESP_Highlight") then
+                    item.ESP_Highlight:Destroy()
+                end
+            end
+            
+            -- 断开连接
+            if _G.ESPConnection then
+                _G.ESPConnection:Disconnect()
+                _G.ESPConnection = nil
+            end
+            
+            WindUI:Notify({
+                Title = "透视已关闭",
+                Content = "已停止高亮显示绷带",
+                Duration = 3
+            })
+        end
+    end
+})
+
+Tabs.ForestTab:Toggle({
+    Title = "透视阿尔法狼",
+    Desc = "高亮显示所有阿尔法狼",
+    Callback = function(state)
+        if state then
+            -- 开启透视
+            local targetItemName = "Alpha Wolf"  -- 要透视的物品名称
+            local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
+            local fillTransparency = 0.4  -- 透明度
+            
+            -- 创建新透视
+            local function createESP(item)
+                if item.Name == targetItemName and not item:FindFirstChild("ESP_Highlight") then
+                    local highlight = Instance.new("Highlight")
+                    highlight.Name = "ESP_Highlight"
+                    highlight.Adornee = item
+                    highlight.FillColor = highlightColor
+                    highlight.FillTransparency = fillTransparency
+                    highlight.OutlineColor = Color3.new(1, 1, 1)
+                    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                    highlight.Parent = item
+                end
+            end
+            
+            -- 立即扫描全图
+            for _, item in pairs(workspace:GetDescendants()) do
+                createESP(item)
+            end
+            
+            -- 监听新生成的物品
+            _G.ESPConnection = workspace.DescendantAdded:Connect(function(item)
+                task.wait(0.1)  -- 等待模型加载
+                createESP(item)
+            end)
+            
+            WindUI:Notify({
+                Title = "透视已激活",
+                Content = "正在高亮显示所有 "..targetItemName,
+                Duration = 3
+            })
+        else
+            -- 关闭透视时只移除当前物品的高亮
+            for _, item in pairs(workspace:GetDescendants()) do
+                if item.Name == "Alpha Wolf" and item:FindFirstChild("ESP_Highlight") then
+                    item.ESP_Highlight:Destroy()
+                end
+            end
+            
+            -- 断开连接
+            if _G.ESPConnection then
+                _G.ESPConnection:Disconnect()
+                _G.ESPConnection = nil
+            end
+            
+            WindUI:Notify({
+                Title = "透视已关闭",
+                Content = "已停止高亮显示绷带",
                 Duration = 3
             })
         end
@@ -2137,8 +2263,8 @@ Tabs.DTab:Button({
 })
 
 Tabs.DTab:Button({
-    Title = "传送到胡萝卜",
-    Desc = "直接传送到最近的胡萝卜旁边",
+    Title = "传送到浆果",
+    Desc = "直接传送到最近的浆果旁边",
     Callback = function()
         -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
         local targetName = "Berry"
@@ -2225,8 +2351,8 @@ Tabs.DTab:Button({
 })
 
 Tabs.DTab:Button({
-    Title = "传送到胡萝卜",
-    Desc = "直接传送到最近的胡萝卜旁边",
+    Title = "传送到原木",
+    Desc = "直接传送到最近的原木旁边",
     Callback = function()
         -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
         local targetName = "Log"
@@ -2311,6 +2437,228 @@ Tabs.DTab:Button({
         end
     end
 })
+
+Tabs.DTab:Button({
+    Title = "传送到左轮手枪",
+    Desc = "直接传送到最近的左轮手枪旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Revolver"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到步枪",
+    Desc = "直接传送到最近的步枪旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Rifle"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到绷带",
+    Desc = "直接传送到最近的绷带旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Bandage"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到步枪",
+    Desc = "直接传送到最近的步枪旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Rifle"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到沃尔法狼",
+    Desc = "直接传送到最近的沃尔法狼旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Alpha Wolf"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+
 
 Tabs.SetTab = Tabs.MainTab:Tab({ Title = "透视设置", Icon = "zap" })
 
@@ -2478,6 +2826,282 @@ Tabs.SetTab:Toggle({
                 _G.CharacterAddedConnection:Disconnect()
             end
         end
+    end
+})
+
+-- 创建全局表存储所有玩家的显示UI
+local playerInventories = {}
+
+-- 创建玩家头顶显示的UI
+local function createPlayerInventoryDisplay(player)
+    -- 如果已有显示则先移除
+    if playerInventories[player] then
+        playerInventories[player]:Destroy()
+    end
+    
+    -- 创建BillboardGui（始终面向玩家的3D UI）
+    local billboard = Instance.new("BillboardGui")
+    billboard.Name = "InventoryDisplay"
+    billboard.Size = UDim2.new(0, 200, 0, 150)
+    billboard.StudsOffset = Vector3.new(0, 3, 0)  -- 头顶上方3个单位
+    billboard.AlwaysOnTop = true
+    billboard.LightInfluence = 0  -- 不受光照影响
+    billboard.Adornee = player.Character:WaitForChild("Head")
+    billboard.Parent = player.Character
+    
+    -- 创建背景框
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(1, 0, 1, 0)
+    frame.BackgroundColor3 = Color3.new(0, 0, 0)
+    frame.BackgroundTransparency = 0.5
+    frame.BorderSizePixel = 0
+    frame.Parent = billboard
+    
+    -- 创建标题文本
+    local title = Instance.new("TextLabel")
+    title.Text = player.Name.."的背包"
+    title.TextColor3 = Color3.new(1, 1, 1)
+    title.TextSize = 14
+    title.Font = Enum.Font.SourceSansBold
+    title.Size = UDim2.new(1, 0, 0, 20)
+    title.BackgroundTransparency = 1
+    title.Parent = frame
+    
+    -- 创建内容文本
+    local content = Instance.new("TextLabel")
+    content.Name = "Content"
+    content.Text = "加载中..."
+    content.TextColor3 = Color3.new(1, 1, 1)
+    content.TextSize = 12
+    content.Font = Enum.Font.SourceSans
+    content.Size = UDim2.new(1, -10, 1, -25)
+    content.Position = UDim2.new(0, 5, 0, 20)
+    content.TextXAlignment = Enum.TextXAlignment.Left
+    content.TextYAlignment = Enum.TextYAlignment.Top
+    content.TextWrapped = true
+    content.BackgroundTransparency = 1
+    content.Parent = frame
+    
+    playerInventories[player] = billboard
+    return content
+end
+
+-- 获取玩家Inventory内容
+local function getInventoryContents(player)
+    -- 尝试从不同位置获取Inventory
+    if player:FindFirstChild("Inventory") then
+        return player.Inventory:GetChildren()
+    elseif player:FindFirstChild("Backpack") then
+        return player.Backpack:GetChildren()
+    elseif player.Character and player.Character:FindFirstChild("Inventory") then
+        return player.Character.Inventory:GetChildren()
+    end
+    return {}
+end
+
+-- 更新玩家背包显示
+local function updatePlayerInventoryDisplay(player)
+    if not player or not player.Character then return end
+    
+    local items = getInventoryContents(player)
+    local displayText = ""
+    
+    -- 格式化显示内容
+    for _, item in ipairs(items) do
+        displayText = displayText .. item.Name .. "\n"
+    end
+    
+    -- 更新UI
+    if playerInventories[player] then
+        local content = playerInventories[player]:FindFirstChild("Frame"):FindFirstChild("Content")
+        if content then
+            content.Text = displayText ~= "" and displayText or "空"
+        end
+    else
+        local content = createPlayerInventoryDisplay(player)
+        content.Text = displayText ~= "" and displayText or "空"
+    end
+end
+
+-- 监听玩家加入
+game:GetService("Players").PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(character)
+        wait(1)  -- 等待角色完全加载
+        updatePlayerInventoryDisplay(player)
+    end)
+end)
+
+-- 初始处理所有玩家
+for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+    if player ~= game.Players.LocalPlayer then
+        player.CharacterAdded:Connect(function(character)
+            wait(1)
+            updatePlayerInventoryDisplay(player)
+        end)
+        if player.Character then
+            updatePlayerInventoryDisplay(player)
+        end
+    end
+end
+
+-- 添加开关控制
+Tabs.SetTab:Toggle({
+    Title = "显示玩家背包",
+    Desc = "显示背包内容",
+    Value = false,
+    Callback = function(state)
+        if state then
+            -- 开启显示
+            for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+                if player ~= game.Players.LocalPlayer and player.Character then
+                    updatePlayerInventoryDisplay(player)
+                end
+            end
+        else
+            -- 关闭显示
+            for _, billboard in pairs(playerInventories) do
+                billboard:Destroy()
+            end
+            playerInventories = {}
+        end
+    end
+})
+
+Tabs.STab = Tabs.MainTab:Tab({ Title = "娱乐", Icon = "zap" })
+
+-- 添加删除Map的功能
+Tabs.STab:Button({
+    Title = "删除地图",
+    Desc = "删除游戏中的Map对象(谨慎使用)",
+    Callback = function()
+        -- 查找并删除所有名为"Map"的对象
+        local maps = workspace:FindFirstChild("Map")
+        if maps then
+            maps:Destroy()
+            WindUI:Notify({
+                Title = "操作成功",
+                Content = "已删除Map对象",
+                Duration = 3
+            })
+        else
+            WindUI:Notify({
+                Title = "操作失败",
+                Content = "未找到Map对象",
+                Duration = 3
+            })
+        end
+    end
+})
+
+Tabs.STab:Button({
+    Title = "管理地图内容",
+    Desc = "查看并删除Map对象中的内容",
+    Callback = function()
+        -- 查找Map对象
+        local map = workspace:FindFirstChild("Map")
+        
+        if not map then
+            WindUI:Notify({
+                Title = "错误",
+                Content = "未找到Map对象",
+                Duration = 3
+            })
+            return
+        end
+        
+        -- 创建新窗口来显示Map内容
+        local mapWindow = WindUI:CreateWindow({
+            Title = "地图内容管理器",
+            Icon = "folder",
+            Size = UDim2.fromOffset(500, 400),
+            Theme = Window.Theme
+        })
+        
+        local mapSection = mapWindow:Section({Title = "Map内容", Opened = true})
+        local mapContentTab = mapSection:Tab({Title = "内容列表", Icon = "list"})
+        
+        -- 存储选择的项目
+        local selectedItems = {}
+        
+        -- 递归显示Map内容
+        local function displayContents(parent, tab, indent)
+            indent = indent or 0
+            
+            for _, child in ipairs(parent:GetChildren()) do
+                -- 创建选择框
+                tab:Toggle({
+                    Title = string.rep("    ", indent) .. child.Name,
+                    Desc = child.ClassName,
+                    Value = false,
+                    Callback = function(state)
+                        selectedItems[child] = state
+                    end
+                })
+                
+                -- 如果有子项，递归显示
+                if #child:GetChildren() > 0 then
+                    displayContents(child, tab, indent + 1)
+                end
+            end
+        end
+        
+        -- 显示Map内容
+        displayContents(map, mapContentTab)
+        
+        -- 添加删除按钮
+        mapContentTab:Button({
+            Title = "删除选中项",
+            Desc = "永久删除选中的项目",
+            Callback = function()
+                local count = 0
+                
+                -- 先确认
+                WindUI:Confirm({
+                    Title = "确认删除",
+                    Content = "确定要删除选中的 "..table.count(selectedItems).." 个项目吗？此操作不可撤销！",
+                    Buttons = {
+                        {
+                            Title = "取消",
+                            Callback = function() end,
+                            Variant = "Secondary"
+                        },
+                        {
+                            Title = "确认删除",
+                            Callback = function()
+                                for item, selected in pairs(selectedItems) do
+                                    if selected and item.Parent then
+                                        pcall(function() -- 使用pcall防止出错
+                                            item:Destroy()
+                                            count = count + 1
+                                        end)
+                                    end
+                                end
+                                
+                                WindUI:Notify({
+                                    Title = "删除完成",
+                                    Content = "已成功删除 "..count.." 个项目",
+                                    Duration = 5
+                                })
+                                
+                                -- 刷新窗口
+                                mapWindow:Close()
+                                mapWindow = nil
+                            end,
+                            Variant = "Destructive"
+                        }
+                    }
+                })
+            end
+        })
+        
+        -- 添加关闭窗口按钮
+        mapContentTab:Button({
+            Title = "关闭管理器",
+            Desc = "关闭此窗口",
+            Callback = function()
+                mapWindow:Close()
+            end
+        })
     end
 })
 
