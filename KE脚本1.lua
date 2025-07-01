@@ -513,8 +513,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视煤",
+    Desc = "高亮显示所有煤",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -563,7 +563,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示煤",
                 Duration = 3
             })
         end
@@ -571,8 +571,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视坏物品箱",
+    Desc = "高亮显示所有物品箱",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -621,7 +621,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示物品箱",
                 Duration = 3
             })
         end
@@ -629,8 +629,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视坏燃料罐",
+    Desc = "高亮显示所有坏燃料罐",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -679,7 +679,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示燃料罐",
                 Duration = 3
             })
         end
@@ -687,8 +687,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视坏熟肉",
+    Desc = "高亮显示所有熟肉块",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -737,7 +737,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示坏熟肉",
                 Duration = 3
             })
         end
@@ -745,8 +745,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视轮胎",
+    Desc = "高亮显示所有轮胎",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -795,7 +795,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示轮胎",
                 Duration = 3
             })
         end
@@ -803,8 +803,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视金属板",
+    Desc = "高亮显示所有金属板",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -853,7 +853,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示金属板",
                 Duration = 3
             })
         end
@@ -861,8 +861,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视步枪弹药",
+    Desc = "高亮显示所有步枪弹药",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -911,7 +911,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示步枪弹药",
                 Duration = 3
             })
         end
@@ -919,8 +919,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视坏左轮手枪弹药",
+    Desc = "高亮显示所有左轮手枪弹药",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -969,7 +969,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示左轮手枪弹药",
                 Duration = 3
             })
         end
@@ -977,8 +977,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视旧收音机",
+    Desc = "高亮显示所有旧收音机",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -1027,7 +1027,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示旧收音机",
                 Duration = 3
             })
         end
@@ -1035,8 +1035,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视狼",
+    Desc = "高亮显示所有狼",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -1085,7 +1085,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示狼",
                 Duration = 3
             })
         end
@@ -1093,8 +1093,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视兔子",
+    Desc = "高亮显示所有兔子",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -1143,7 +1143,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示兔子",
                 Duration = 3
             })
         end
@@ -1151,8 +1151,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视螺栓",
+    Desc = "高亮显示所有螺栓",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -1201,7 +1201,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示螺栓",
                 Duration = 3
             })
         end
@@ -1209,8 +1209,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视浆果",
+    Desc = "高亮显示所有浆果",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -1259,7 +1259,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示浆果",
                 Duration = 3
             })
         end
@@ -1267,8 +1267,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视旧手电筒",
+    Desc = "高亮显示所有旧手电筒",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -1317,7 +1317,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示旧手电筒",
                 Duration = 3
             })
         end
@@ -1325,8 +1325,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视原木",
+    Desc = "高亮显示所有原木",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -1375,7 +1375,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示原木",
                 Duration = 3
             })
         end
@@ -1383,8 +1383,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Title = "透视椅子",
+    Desc = "高亮显示所有椅子",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -1433,7 +1433,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示椅子",
                 Duration = 3
             })
         end
@@ -1442,11 +1442,11 @@ Tabs.ForestTab:Toggle({
 
 Tabs.ForestTab:Toggle({
     Title = "透视坏风扇",
-    Desc = "高亮显示所有坏风扇",
+    Desc = "高亮显示所有步枪",
     Callback = function(state)
         if state then
             -- 开启透视
-            local targetItemName = ""
+            local targetItemName = "Rifle"
             local highlightColor = Color3.fromRGB(0, 255, 0)
             local fillTransparency = 0.4
             
@@ -1491,7 +1491,7 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示坏风扇",
+                Content = "已停止高亮显示步枪",
                 Duration = 3
             })
         end
@@ -1499,8 +1499,8 @@ Tabs.ForestTab:Toggle({
 })
 
 Tabs.ForestTab:Toggle({
-    Title = "透视兔子脚",
-    Desc = "高亮显示所有兔子脚",
+    Title = "透视左轮手枪",
+    Desc = "高亮显示所有左轮手枪",
     Callback = function(state)
         if state then
             -- 开启透视
@@ -1554,84 +1554,726 @@ Tabs.ForestTab:Toggle({
             
             WindUI:Notify({
                 Title = "透视已关闭",
-                Content = "已停止高亮显示兔子脚",
+                Content = "已停止高亮显示左轮手枪脚",
                 Duration = 3
             })
         end
     end
 })
 
-Tabs.ForestTab:Toggle({
-    Title = "透视兔子脚",
-    Desc = "高亮显示所有兔子脚",
-    Callback = function(state)
-        if state then
-            -- 开启透视
-            local targetItemName = "Rifle"  -- 要透视的物品名称
-            local highlightColor = Color3.fromRGB(0, 255, 0)  -- 绿色高亮
-            local fillTransparency = 0.4  -- 透明度
-            
-            -- 创建新透视
-            local function createESP(item)
-                if item.Name == targetItemName and not item:FindFirstChild("ESP_Highlight") then
-                    local highlight = Instance.new("Highlight")
-                    highlight.Name = "ESP_Highlight"
-                    highlight.Adornee = item
-                    highlight.FillColor = highlightColor
-                    highlight.FillTransparency = fillTransparency
-                    highlight.OutlineColor = Color3.new(1, 1, 1)
-                    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-                    highlight.Parent = item
-                end
-            end
-            
-            -- 立即扫描全图
-            for _, item in pairs(workspace:GetDescendants()) do
-                createESP(item)
-            end
-            
-            -- 监听新生成的物品
-            _G.ESPConnection = workspace.DescendantAdded:Connect(function(item)
-                task.wait(0.1)  -- 等待模型加载
-                createESP(item)
-            end)
-            
-            WindUI:Notify({
-                Title = "透视已激活",
-                Content = "正在高亮显示所有 "..targetItemName,
-                Duration = 3
-            })
-        else
-            -- 关闭透视时只移除当前物品的高亮
-            for _, item in pairs(workspace:GetDescendants()) do
-                if item.Name == "Rifle" and item:FindFirstChild("ESP_Highlight") then
-                    item.ESP_Highlight:Destroy()
-                end
-            end
-            
-            -- 断开连接
-            if _G.ESPConnection then
-                _G.ESPConnection:Disconnect()
-                _G.ESPConnection = nil
-            end
-            
-            WindUI:Notify({
-                Title = "透视已关闭",
-                Content = "已停止高亮显示兔子脚",
-                Duration = 3
-            })
-        end
-    end
-})
+Tabs.DTab = Tabs.MainTab:Tab({ Title = "传送", Icon = "zap" })
 
-Tabs.ForestTab = Tabs.MainTab:Tab({ Title = "传送", Icon = "zap" })
-
-Tabs.ForestTab:Button({
+Tabs.DTab:Button({
     Title = "传送到胡萝卜",
     Desc = "直接传送到最近的胡萝卜旁边",
     Callback = function()
         -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
         local targetName = "Carrot"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送胡萝卜",
+    Desc = "直接传送到最近的煤胡旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Coal"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到物品箱",
+    Desc = "直接传送到最近的物品箱旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Item Chest"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到燃料罐",
+    Desc = "直接传送到最近的燃料罐旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Fuel Canister"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到熟肉块",
+    Desc = "直接传送到最近的熟肉块旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Cooked Morsel"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到轮胎",
+    Desc = "直接传送到最近的轮胎旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Tyre"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到金属板",
+    Desc = "直接传送到最近的金属板旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Sheet Metal"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到步枪弹药",
+    Desc = "直接传送到最近的步枪弹药旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Rifle Ammo"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到左轮手枪弹药",
+    Desc = "直接传送到最近的左轮手枪弹药旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Revolver Ammo"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+
+Tabs.DTab:Button({
+    Title = "传送到旧收音机",
+    Desc = "直接传送到最近的旧收音机旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Old Radio"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到狼",
+    Desc = "直接传送到最近的狼旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Wolf"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到兔子",
+    Desc = "直接传送到最近的兔子旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Bunny"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到螺栓",
+    Desc = "直接传送到最近的螺栓旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Bolt"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到胡萝卜",
+    Desc = "直接传送到最近的胡萝卜旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Berry"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到手电筒",
+    Desc = "直接传送到最近的手电筒旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Old Flashlight"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到胡萝卜",
+    Desc = "直接传送到最近的胡萝卜旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Log"
+        
+        -- 获取玩家角色和HRP
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character:FindFirstChild("HumanoidRootPart") then
+            return -- 静默失败，不显示错误
+        end
+        
+        local hrp = character.HumanoidRootPart
+        local closestItem = nil
+        local minDistance = math.huge -- 初始设为极大值
+        
+        -- 优化搜索：只搜索包含BasePart的模型
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item.Name == targetName then
+                -- 如果是模型，找它的主部件
+                local primaryPart = item:IsA("Model") and item.PrimaryPart or item
+                
+                -- 确保有有效的BasePart
+                if primaryPart and primaryPart:IsA("BasePart") then
+                    local distance = (primaryPart.Position - hrp.Position).Magnitude
+                    if distance < minDistance then
+                        closestItem = primaryPart
+                        minDistance = distance
+                    end
+                end
+            end
+        end
+        
+        -- 如果找到目标物品，进行传送
+        if closestItem then
+            -- 计算传送位置（物品上方3个单位，并面向物品）
+            local offset = Vector3.new(0, 3, 0)
+            hrp.CFrame = CFrame.new(closestItem.Position + offset, closestItem.Position)
+        end
+    end
+})
+
+Tabs.DTab:Button({
+    Title = "传送到椅子",
+    Desc = "直接传送到最近的椅子旁边",
+    Callback = function()
+        -- 要传送的目标物品名称（可修改为其他物品如"Tree"、"Wolf"等）
+        local targetName = "Chair"
         
         -- 获取玩家角色和HRP
         local player = game.Players.LocalPlayer
@@ -1767,7 +2409,7 @@ local function createHighlight(item)
 end
 
 -- 在透视人物标签中添加玩家透视功能
-Tabs.ForestTab:Toggle({
+Tabs.SetTab:Toggle({
     Title = "透视玩家",
     Desc = "高亮显示所有玩家角色",
     Value = false,
