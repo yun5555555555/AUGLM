@@ -3009,6 +3009,899 @@ Tabs.DTab:Button({
     end
 })
 
+Tabs.csTab = Tabs.MainTab:Tab({ Title = "物品传送", Icon = "zap" })
+
+Tabs.csTab:Button({
+    Title = "收集 Items 中的木头 (增强版)",
+    Desc = "从 workspace.Items 中取出所有木头并确保传送到玩家15米范围内",
+    Callback = function()
+        -- 获取玩家角色和HRP，带有等待机制
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character then
+            character = player.CharacterAdded:Wait()
+        end
+        
+        local hrp = character:WaitForChild("HumanoidRootPart", 5)
+        if not hrp then
+            WindUI:Notify({
+                Title = "错误",
+                Content = "无法获取角色HRP",
+                Duration = 3
+            })
+            return
+        end
+
+        -- 显示开始收集通知
+        WindUI:Notify({
+            Title = "开始收集",
+            Content = "正在搜索木头...",
+            Duration = 2
+        })
+
+        local itemsFolder = workspace:FindFirstChild("Items")
+
+        -- 检查 Items 文件夹是否存在
+        if not itemsFolder then
+            WindUI:Notify({
+                Title = "错误",
+                Content = "未找到 workspace.Items 文件夹",
+                Duration = 3
+            })
+            return
+        end
+
+        -- 获取所有符合条件的木头模型（不区分大小写）
+        local logsToMove = {}
+        local function isLogModel(model)
+            return model:IsA("Model") and string.lower(model.Name) == "log"
+        end
+
+        -- 递归搜索子文件夹
+        local function searchFolder(folder)
+            for _, obj in ipairs(folder:GetChildren()) do
+                if isLogModel(obj) then
+                    table.insert(logsToMove, obj)
+                elseif obj:IsA("Folder") or obj:IsA("Model") then
+                    searchFolder(obj) -- 递归搜索子容器
+                end
+            end
+        end
+
+        searchFolder(itemsFolder)
+
+        -- 没有找到 Log 模型
+        if #logsToMove == 0 then
+            WindUI:Notify({
+                Title = "无木头",
+                Content = "未找到任何名为 'Log' 的模型",
+                Duration = 3
+            })
+            return
+        end
+
+        -- 显示找到的数量
+        WindUI:Notify({
+            Title = "找到木头",
+            Content = string.format("共找到 %d 个木头模型", #logsToMove),
+            Duration = 2
+        })
+
+        -- 计算环绕半径（根据木头数量动态调整）
+        local baseRadius = 5
+        local dynamicRadius = math.min(baseRadius + (#logsToMove * 0.5), 15) -- 最大半径15
+
+        -- 重试传送直到在15米范围内
+        local function ensureWithinDistance(model, targetPosition, maxAttempts)
+            local attempts = 0
+            local maxDistance = 15 -- 最大允许距离
+            local success = false
+            
+            repeat
+                attempts = attempts + 1
+                
+                -- 获取模型当前位置
+                local currentPrimary = model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart")
+                if not currentPrimary then return false end
+                
+                -- 尝试传送
+                local moveSuccess = pcall(function()
+                    model:PivotTo(CFrame.new(targetPosition))
+                end)
+                
+                if not moveSuccess then
+                    pcall(function()
+                        currentPrimary.CFrame = CFrame.new(targetPosition)
+                    end)
+                end
+                
+                -- 等待物理更新
+                task.wait(0.1)
+                
+                -- 检查距离
+                local currentPos = currentPrimary.Position
+                local distance = (currentPos - hrp.Position).Magnitude
+                
+                if distance <= maxDistance then
+                    success = true
+                    break
+                else
+                    -- 调整目标位置更靠近玩家
+                    local direction = (hrp.Position - currentPos).Unit
+                    targetPosition = hrp.Position + (direction * math.min(distance - maxDistance, 10))
+                end
+            until attempts >= maxAttempts
+            
+            return success
+        end
+
+        -- 开始传送每一个 Log 模型
+        local successCount = 0
+        local failedCount = 0
+        for i, model in ipairs(logsToMove) do
+            -- 检查模型是否仍然存在
+            if not model or not model.Parent then
+                warn("模型已消失:", model and model.Name or "N/A")
+                failedCount = failedCount + 1
+                continue
+            end
+
+            local primaryPart = model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart")
+            if not primaryPart then
+                warn("模型无主部件:", model.Name)
+                failedCount = failedCount + 1
+                continue
+            end
+
+            -- 设置 PrimaryPart（确保 PivotTo 正常工作）
+            if not model.PrimaryPart then
+                model.PrimaryPart = primaryPart
+            end
+
+            -- 计算环绕位置（螺旋分布，防止重叠）
+            local angle = (i - 1) * (2 * math.pi / (#logsToMove/2))
+            local heightOffset = math.floor(i/10) * 3 -- 每10个木头增加一层高度
+            local offset = Vector3.new(
+                math.cos(angle) * dynamicRadius,
+                1 + heightOffset, -- 高度分层
+                math.sin(angle) * dynamicRadius
+            )
+            local targetPosition = hrp.Position + offset
+
+            -- 先固定模型防止掉落
+            for _, part in ipairs(model:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.Anchored = true
+                end
+            end
+
+            -- 尝试传送并确保在15米范围内（最多重试3次）
+            local finalSuccess = ensureWithinDistance(model, targetPosition, 3)
+            
+            if finalSuccess then
+                successCount = successCount + 1
+                
+                -- 添加临时特效
+                local highlight = Instance.new("Highlight")
+                highlight.FillTransparency = 0.8
+                highlight.OutlineColor = finalSuccess and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(255, 0, 0)
+                highlight.Parent = model
+                game:GetService("Debris"):AddItem(highlight, 1)
+            else
+                failedCount = failedCount + 1
+                warn("无法将木头传送到范围内:", model.Name)
+            end
+
+            -- 恢复物理属性（延迟恢复防止掉落）
+            delay(0.5, function()
+                if model and model.Parent then
+                    for _, part in ipairs(model:GetDescendants()) do
+                        if part:IsA("BasePart") then
+                            part.Anchored = false
+                            part.CanCollide = true
+                            part.Velocity = Vector3.zero
+                            part.RotVelocity = Vector3.zero
+                        end
+                    end
+                    
+                    -- 删除可能影响物理的约束
+                    for _, constraint in ipairs(model:GetDescendants()) do
+                        if constraint:IsA("Constraint") then
+                            constraint:Destroy()
+                        end
+                    end
+                end
+            end)
+
+            task.wait(0.05) -- 更短的等待时间提高效率
+        end
+
+        -- 成功提示
+        local resultMessage
+        if failedCount == 0 then
+            resultMessage = string.format("✅ 成功传送所有 %d 个木头到身边", successCount)
+        else
+            resultMessage = string.format("⚠️ 成功传送 %d 个，失败 %d 个", successCount, failedCount)
+        end
+        
+        WindUI:Notify({
+            Title = "收集完成",
+            Content = resultMessage,
+            Duration = 5
+        })
+    end
+})
+
+Tabs.csTab:Button({
+    Title = "收集 Items 中的煤 (增强版)",
+    Desc = "从 workspace.Items 中取出所有木头并确保传送到玩家15米范围内",
+    Callback = function()
+        -- 获取玩家角色和HRP，带有等待机制
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character then
+            character = player.CharacterAdded:Wait()
+        end
+        
+        local hrp = character:WaitForChild("HumanoidRootPart", 5)
+        if not hrp then
+            WindUI:Notify({
+                Title = "错误",
+                Content = "无法获取角色HRP",
+                Duration = 3
+            })
+            return
+        end
+
+        -- 显示开始收集通知
+        WindUI:Notify({
+            Title = "开始收集",
+            Content = "正在搜索木头...",
+            Duration = 2
+        })
+
+        local itemsFolder = workspace:FindFirstChild("Items")
+
+        -- 检查 Items 文件夹是否存在
+        if not itemsFolder then
+            WindUI:Notify({
+                Title = "错误",
+                Content = "未找到 workspace.Items 文件夹",
+                Duration = 3
+            })
+            return
+        end
+
+        -- 获取所有符合条件的木头模型（不区分大小写）
+        local logsToMove = {}
+        local function isLogModel(model)
+            return model:IsA("Model") and string.lower(model.Name) == "coal"
+        end
+
+        -- 递归搜索子文件夹
+        local function searchFolder(folder)
+            for _, obj in ipairs(folder:GetChildren()) do
+                if isLogModel(obj) then
+                    table.insert(logsToMove, obj)
+                elseif obj:IsA("Folder") or obj:IsA("Model") then
+                    searchFolder(obj) -- 递归搜索子容器
+                end
+            end
+        end
+
+        searchFolder(itemsFolder)
+
+        -- 没有找到 Log 模型
+        if #logsToMove == 0 then
+            WindUI:Notify({
+                Title = "无木头",
+                Content = "未找到任何名为 'Log' 的模型",
+                Duration = 3
+            })
+            return
+        end
+
+        -- 显示找到的数量
+        WindUI:Notify({
+            Title = "找到木头",
+            Content = string.format("共找到 %d 个木头模型", #logsToMove),
+            Duration = 2
+        })
+
+        -- 计算环绕半径（根据木头数量动态调整）
+        local baseRadius = 5
+        local dynamicRadius = math.min(baseRadius + (#logsToMove * 0.5), 15) -- 最大半径15
+
+        -- 重试传送直到在15米范围内
+        local function ensureWithinDistance(model, targetPosition, maxAttempts)
+            local attempts = 0
+            local maxDistance = 15 -- 最大允许距离
+            local success = false
+            
+            repeat
+                attempts = attempts + 1
+                
+                -- 获取模型当前位置
+                local currentPrimary = model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart")
+                if not currentPrimary then return false end
+                
+                -- 尝试传送
+                local moveSuccess = pcall(function()
+                    model:PivotTo(CFrame.new(targetPosition))
+                end)
+                
+                if not moveSuccess then
+                    pcall(function()
+                        currentPrimary.CFrame = CFrame.new(targetPosition)
+                    end)
+                end
+                
+                -- 等待物理更新
+                task.wait(0.1)
+                
+                -- 检查距离
+                local currentPos = currentPrimary.Position
+                local distance = (currentPos - hrp.Position).Magnitude
+                
+                if distance <= maxDistance then
+                    success = true
+                    break
+                else
+                    -- 调整目标位置更靠近玩家
+                    local direction = (hrp.Position - currentPos).Unit
+                    targetPosition = hrp.Position + (direction * math.min(distance - maxDistance, 10))
+                end
+            until attempts >= maxAttempts
+            
+            return success
+        end
+
+        -- 开始传送每一个 Log 模型
+        local successCount = 0
+        local failedCount = 0
+        for i, model in ipairs(logsToMove) do
+            -- 检查模型是否仍然存在
+            if not model or not model.Parent then
+                warn("模型已消失:", model and model.Name or "N/A")
+                failedCount = failedCount + 1
+                continue
+            end
+
+            local primaryPart = model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart")
+            if not primaryPart then
+                warn("模型无主部件:", model.Name)
+                failedCount = failedCount + 1
+                continue
+            end
+
+            -- 设置 PrimaryPart（确保 PivotTo 正常工作）
+            if not model.PrimaryPart then
+                model.PrimaryPart = primaryPart
+            end
+
+            -- 计算环绕位置（螺旋分布，防止重叠）
+            local angle = (i - 1) * (2 * math.pi / (#logsToMove/2))
+            local heightOffset = math.floor(i/10) * 3 -- 每10个木头增加一层高度
+            local offset = Vector3.new(
+                math.cos(angle) * dynamicRadius,
+                1 + heightOffset, -- 高度分层
+                math.sin(angle) * dynamicRadius
+            )
+            local targetPosition = hrp.Position + offset
+
+            -- 先固定模型防止掉落
+            for _, part in ipairs(model:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.Anchored = true
+                end
+            end
+
+            -- 尝试传送并确保在15米范围内（最多重试3次）
+            local finalSuccess = ensureWithinDistance(model, targetPosition, 3)
+            
+            if finalSuccess then
+                successCount = successCount + 1
+                
+                -- 添加临时特效
+                local highlight = Instance.new("Highlight")
+                highlight.FillTransparency = 0.8
+                highlight.OutlineColor = finalSuccess and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(255, 0, 0)
+                highlight.Parent = model
+                game:GetService("Debris"):AddItem(highlight, 1)
+            else
+                failedCount = failedCount + 1
+                warn("无法将木头传送到范围内:", model.Name)
+            end
+
+            -- 恢复物理属性（延迟恢复防止掉落）
+            delay(0.5, function()
+                if model and model.Parent then
+                    for _, part in ipairs(model:GetDescendants()) do
+                        if part:IsA("BasePart") then
+                            part.Anchored = false
+                            part.CanCollide = true
+                            part.Velocity = Vector3.zero
+                            part.RotVelocity = Vector3.zero
+                        end
+                    end
+                    
+                    -- 删除可能影响物理的约束
+                    for _, constraint in ipairs(model:GetDescendants()) do
+                        if constraint:IsA("Constraint") then
+                            constraint:Destroy()
+                        end
+                    end
+                end
+            end)
+
+            task.wait(0.05) -- 更短的等待时间提高效率
+        end
+
+        -- 成功提示
+        local resultMessage
+        if failedCount == 0 then
+            resultMessage = string.format("✅ 成功传送所有 %d 个木头到身边", successCount)
+        else
+            resultMessage = string.format("⚠️ 成功传送 %d 个，失败 %d 个", successCount, failedCount)
+        end
+        
+        WindUI:Notify({
+            Title = "收集完成",
+            Content = resultMessage,
+            Duration = 5
+        })
+    end
+})
+
+Tabs.csTab:Button({
+    Title = "收集 Items 中的胡萝卜 (增强版)",
+    Desc = "从 workspace.Items 中取出所有木头并确保传送到玩家15米范围内",
+    Callback = function()
+        -- 获取玩家角色和HRP，带有等待机制
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character then
+            character = player.CharacterAdded:Wait()
+        end
+        
+        local hrp = character:WaitForChild("HumanoidRootPart", 5)
+        if not hrp then
+            WindUI:Notify({
+                Title = "错误",
+                Content = "无法获取角色HRP",
+                Duration = 3
+            })
+            return
+        end
+
+        -- 显示开始收集通知
+        WindUI:Notify({
+            Title = "开始收集",
+            Content = "正在搜索木头...",
+            Duration = 2
+        })
+
+        local itemsFolder = workspace:FindFirstChild("Items")
+
+        -- 检查 Items 文件夹是否存在
+        if not itemsFolder then
+            WindUI:Notify({
+                Title = "错误",
+                Content = "未找到 workspace.Items 文件夹",
+                Duration = 3
+            })
+            return
+        end
+
+        -- 获取所有符合条件的木头模型（不区分大小写）
+        local logsToMove = {}
+        local function isLogModel(model)
+            return model:IsA("Model") and string.lower(model.Name) == "carrot"
+        end
+
+        -- 递归搜索子文件夹
+        local function searchFolder(folder)
+            for _, obj in ipairs(folder:GetChildren()) do
+                if isLogModel(obj) then
+                    table.insert(logsToMove, obj)
+                elseif obj:IsA("Folder") or obj:IsA("Model") then
+                    searchFolder(obj) -- 递归搜索子容器
+                end
+            end
+        end
+
+        searchFolder(itemsFolder)
+
+        -- 没有找到 Log 模型
+        if #logsToMove == 0 then
+            WindUI:Notify({
+                Title = "无木头",
+                Content = "未找到任何名为 'Log' 的模型",
+                Duration = 3
+            })
+            return
+        end
+
+        -- 显示找到的数量
+        WindUI:Notify({
+            Title = "找到木头",
+            Content = string.format("共找到 %d 个木头模型", #logsToMove),
+            Duration = 2
+        })
+
+        -- 计算环绕半径（根据木头数量动态调整）
+        local baseRadius = 5
+        local dynamicRadius = math.min(baseRadius + (#logsToMove * 0.5), 15) -- 最大半径15
+
+        -- 重试传送直到在15米范围内
+        local function ensureWithinDistance(model, targetPosition, maxAttempts)
+            local attempts = 0
+            local maxDistance = 15 -- 最大允许距离
+            local success = false
+            
+            repeat
+                attempts = attempts + 1
+                
+                -- 获取模型当前位置
+                local currentPrimary = model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart")
+                if not currentPrimary then return false end
+                
+                -- 尝试传送
+                local moveSuccess = pcall(function()
+                    model:PivotTo(CFrame.new(targetPosition))
+                end)
+                
+                if not moveSuccess then
+                    pcall(function()
+                        currentPrimary.CFrame = CFrame.new(targetPosition)
+                    end)
+                end
+                
+                -- 等待物理更新
+                task.wait(0.1)
+                
+                -- 检查距离
+                local currentPos = currentPrimary.Position
+                local distance = (currentPos - hrp.Position).Magnitude
+                
+                if distance <= maxDistance then
+                    success = true
+                    break
+                else
+                    -- 调整目标位置更靠近玩家
+                    local direction = (hrp.Position - currentPos).Unit
+                    targetPosition = hrp.Position + (direction * math.min(distance - maxDistance, 10))
+                end
+            until attempts >= maxAttempts
+            
+            return success
+        end
+
+        -- 开始传送每一个 Log 模型
+        local successCount = 0
+        local failedCount = 0
+        for i, model in ipairs(logsToMove) do
+            -- 检查模型是否仍然存在
+            if not model or not model.Parent then
+                warn("模型已消失:", model and model.Name or "N/A")
+                failedCount = failedCount + 1
+                continue
+            end
+
+            local primaryPart = model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart")
+            if not primaryPart then
+                warn("模型无主部件:", model.Name)
+                failedCount = failedCount + 1
+                continue
+            end
+
+            -- 设置 PrimaryPart（确保 PivotTo 正常工作）
+            if not model.PrimaryPart then
+                model.PrimaryPart = primaryPart
+            end
+
+            -- 计算环绕位置（螺旋分布，防止重叠）
+            local angle = (i - 1) * (2 * math.pi / (#logsToMove/2))
+            local heightOffset = math.floor(i/10) * 3 -- 每10个木头增加一层高度
+            local offset = Vector3.new(
+                math.cos(angle) * dynamicRadius,
+                1 + heightOffset, -- 高度分层
+                math.sin(angle) * dynamicRadius
+            )
+            local targetPosition = hrp.Position + offset
+
+            -- 先固定模型防止掉落
+            for _, part in ipairs(model:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.Anchored = true
+                end
+            end
+
+            -- 尝试传送并确保在15米范围内（最多重试3次）
+            local finalSuccess = ensureWithinDistance(model, targetPosition, 3)
+            
+            if finalSuccess then
+                successCount = successCount + 1
+                
+                -- 添加临时特效
+                local highlight = Instance.new("Highlight")
+                highlight.FillTransparency = 0.8
+                highlight.OutlineColor = finalSuccess and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(255, 0, 0)
+                highlight.Parent = model
+                game:GetService("Debris"):AddItem(highlight, 1)
+            else
+                failedCount = failedCount + 1
+                warn("无法将木头传送到范围内:", model.Name)
+            end
+
+            -- 恢复物理属性（延迟恢复防止掉落）
+            delay(0.5, function()
+                if model and model.Parent then
+                    for _, part in ipairs(model:GetDescendants()) do
+                        if part:IsA("BasePart") then
+                            part.Anchored = false
+                            part.CanCollide = true
+                            part.Velocity = Vector3.zero
+                            part.RotVelocity = Vector3.zero
+                        end
+                    end
+                    
+                    -- 删除可能影响物理的约束
+                    for _, constraint in ipairs(model:GetDescendants()) do
+                        if constraint:IsA("Constraint") then
+                            constraint:Destroy()
+                        end
+                    end
+                end
+            end)
+
+            task.wait(0.05) -- 更短的等待时间提高效率
+        end
+
+        -- 成功提示
+        local resultMessage
+        if failedCount == 0 then
+            resultMessage = string.format("✅ 成功传送所有 %d 个木头到身边", successCount)
+        else
+            resultMessage = string.format("⚠️ 成功传送 %d 个，失败 %d 个", successCount, failedCount)
+        end
+        
+        WindUI:Notify({
+            Title = "收集完成",
+            Content = resultMessage,
+            Duration = 5
+        })
+    end
+})
+
+Tabs.csTab:Button({
+    Title = "收集 Items 中的木头 (增强版)",
+    Desc = "从 workspace.Items 中取出所有木头并确保传送到玩家15米范围内",
+    Callback = function()
+        -- 获取玩家角色和HRP，带有等待机制
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character then
+            character = player.CharacterAdded:Wait()
+        end
+        
+        local hrp = character:WaitForChild("HumanoidRootPart", 5)
+        if not hrp then
+            WindUI:Notify({
+                Title = "错误",
+                Content = "无法获取角色HRP",
+                Duration = 3
+            })
+            return
+        end
+
+        -- 显示开始收集通知
+        WindUI:Notify({
+            Title = "开始收集",
+            Content = "正在搜索木头...",
+            Duration = 2
+        })
+
+        local itemsFolder = workspace:FindFirstChild("Items")
+
+        -- 检查 Items 文件夹是否存在
+        if not itemsFolder then
+            WindUI:Notify({
+                Title = "错误",
+                Content = "未找到 workspace.Items 文件夹",
+                Duration = 3
+            })
+            return
+        end
+
+        -- 获取所有符合条件的木头模型（不区分大小写）
+        local logsToMove = {}
+        local function isLogModel(model)
+            return model:IsA("Model") and string.lower(model.Name) == "bolt"
+        end
+
+        -- 递归搜索子文件夹
+        local function searchFolder(folder)
+            for _, obj in ipairs(folder:GetChildren()) do
+                if isLogModel(obj) then
+                    table.insert(logsToMove, obj)
+                elseif obj:IsA("Folder") or obj:IsA("Model") then
+                    searchFolder(obj) -- 递归搜索子容器
+                end
+            end
+        end
+
+        searchFolder(itemsFolder)
+
+        -- 没有找到 Log 模型
+        if #logsToMove == 0 then
+            WindUI:Notify({
+                Title = "无木头",
+                Content = "未找到任何名为 'Log' 的模型",
+                Duration = 3
+            })
+            return
+        end
+
+        -- 显示找到的数量
+        WindUI:Notify({
+            Title = "找到木头",
+            Content = string.format("共找到 %d 个木头模型", #logsToMove),
+            Duration = 2
+        })
+
+        -- 计算环绕半径（根据木头数量动态调整）
+        local baseRadius = 5
+        local dynamicRadius = math.min(baseRadius + (#logsToMove * 0.5), 15) -- 最大半径15
+
+        -- 重试传送直到在15米范围内
+        local function ensureWithinDistance(model, targetPosition, maxAttempts)
+            local attempts = 0
+            local maxDistance = 15 -- 最大允许距离
+            local success = false
+            
+            repeat
+                attempts = attempts + 1
+                
+                -- 获取模型当前位置
+                local currentPrimary = model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart")
+                if not currentPrimary then return false end
+                
+                -- 尝试传送
+                local moveSuccess = pcall(function()
+                    model:PivotTo(CFrame.new(targetPosition))
+                end)
+                
+                if not moveSuccess then
+                    pcall(function()
+                        currentPrimary.CFrame = CFrame.new(targetPosition)
+                    end)
+                end
+                
+                -- 等待物理更新
+                task.wait(0.1)
+                
+                -- 检查距离
+                local currentPos = currentPrimary.Position
+                local distance = (currentPos - hrp.Position).Magnitude
+                
+                if distance <= maxDistance then
+                    success = true
+                    break
+                else
+                    -- 调整目标位置更靠近玩家
+                    local direction = (hrp.Position - currentPos).Unit
+                    targetPosition = hrp.Position + (direction * math.min(distance - maxDistance, 10))
+                end
+            until attempts >= maxAttempts
+            
+            return success
+        end
+
+        -- 开始传送每一个 Log 模型
+        local successCount = 0
+        local failedCount = 0
+        for i, model in ipairs(logsToMove) do
+            -- 检查模型是否仍然存在
+            if not model or not model.Parent then
+                warn("模型已消失:", model and model.Name or "N/A")
+                failedCount = failedCount + 1
+                continue
+            end
+
+            local primaryPart = model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart")
+            if not primaryPart then
+                warn("模型无主部件:", model.Name)
+                failedCount = failedCount + 1
+                continue
+            end
+
+            -- 设置 PrimaryPart（确保 PivotTo 正常工作）
+            if not model.PrimaryPart then
+                model.PrimaryPart = primaryPart
+            end
+
+            -- 计算环绕位置（螺旋分布，防止重叠）
+            local angle = (i - 1) * (2 * math.pi / (#logsToMove/2))
+            local heightOffset = math.floor(i/10) * 3 -- 每10个木头增加一层高度
+            local offset = Vector3.new(
+                math.cos(angle) * dynamicRadius,
+                1 + heightOffset, -- 高度分层
+                math.sin(angle) * dynamicRadius
+            )
+            local targetPosition = hrp.Position + offset
+
+            -- 先固定模型防止掉落
+            for _, part in ipairs(model:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.Anchored = true
+                end
+            end
+
+            -- 尝试传送并确保在15米范围内（最多重试3次）
+            local finalSuccess = ensureWithinDistance(model, targetPosition, 3)
+            
+            if finalSuccess then
+                successCount = successCount + 1
+                
+                -- 添加临时特效
+                local highlight = Instance.new("Highlight")
+                highlight.FillTransparency = 0.8
+                highlight.OutlineColor = finalSuccess and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(255, 0, 0)
+                highlight.Parent = model
+                game:GetService("Debris"):AddItem(highlight, 1)
+            else
+                failedCount = failedCount + 1
+                warn("无法将木头传送到范围内:", model.Name)
+            end
+
+            -- 恢复物理属性（延迟恢复防止掉落）
+            delay(0.5, function()
+                if model and model.Parent then
+                    for _, part in ipairs(model:GetDescendants()) do
+                        if part:IsA("BasePart") then
+                            part.Anchored = false
+                            part.CanCollide = true
+                            part.Velocity = Vector3.zero
+                            part.RotVelocity = Vector3.zero
+                        end
+                    end
+                    
+                    -- 删除可能影响物理的约束
+                    for _, constraint in ipairs(model:GetDescendants()) do
+                        if constraint:IsA("Constraint") then
+                            constraint:Destroy()
+                        end
+                    end
+                end
+            end)
+
+            task.wait(0.05) -- 更短的等待时间提高效率
+        end
+
+        -- 成功提示
+        local resultMessage
+        if failedCount == 0 then
+            resultMessage = string.format("✅ 成功传送所有 %d 个木头到身边", successCount)
+        else
+            resultMessage = string.format("⚠️ 成功传送 %d 个，失败 %d 个", successCount, failedCount)
+        end
+        
+        WindUI:Notify({
+            Title = "收集完成",
+            Content = resultMessage,
+            Duration = 5
+        })
+    end
+})
+
+
+
+
+
+
+
+
 
 
 Tabs.SetTab = Tabs.MainTab:Tab({ Title = "透视设置", Icon = "zap" })
